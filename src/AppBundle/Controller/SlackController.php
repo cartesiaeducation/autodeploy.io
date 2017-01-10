@@ -92,9 +92,8 @@ class SlackController extends Controller
      * @Route("/slacks/{id}/delete", name="app_projects_slacks_delete")
      * @Method("POST")
      *
-     * @param Request $request
-     * @param Slack   $slack
-     
+     * @param  Request      $request
+     * @param  Slack        $slack
      * @return JsonResponse
      */
     public function deleteAction(Request $request, Slack $slack)

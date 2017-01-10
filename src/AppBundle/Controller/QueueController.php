@@ -35,7 +35,7 @@ class QueueController extends Controller
         if ($form->isValid()) {
             $this->getQueueManager()->save($form->getData());
             $this->get('metric')->add('app_queue', [
-                'value'     => 1,
+                'value' => 1,
             ], [
                 'project'   => $project->getName(),
                 'task_name' => $task->getName(),

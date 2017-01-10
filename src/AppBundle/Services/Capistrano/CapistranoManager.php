@@ -109,7 +109,7 @@ class CapistranoManager
     {
         if (!file_exists($this->getCapfilePath($localPath))) {
             throw new \Exception('Capfile missing in root project directory');
-        };
+        }
     }
 
     /**

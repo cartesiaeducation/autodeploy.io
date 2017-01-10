@@ -97,7 +97,7 @@ EOF;
 
 {$this->generateValue('linked_dirs', '%w' . $linkedDirs, false)}
 EOF;
-        };
+        }
 
         return $config;
     }

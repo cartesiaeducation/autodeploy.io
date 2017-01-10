@@ -11,7 +11,7 @@ class EmailProvider extends UserProvider
 {
     /**
      * @param string $username
-     * 
+     *
      * @return \FOS\UserBundle\Model\UserInterface
      */
     protected function findUser($username)

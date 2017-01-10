@@ -96,9 +96,8 @@ class WebhookController extends Controller
      * @Route("/webhooks/{id}/delete", name="app_projects_webhooks_delete")
      * @Method("POST")
      *
-     * @param Request $request
-     * @param Webhook $webhook
-     
+     * @param  Request      $request
+     * @param  Webhook      $webhook
      * @return JsonResponse
      */
     public function deleteAction(Request $request, Webhook $webhook)
@@ -121,7 +120,7 @@ class WebhookController extends Controller
     /**
      * @Route("/webhook-process/{token}", name="app_projects_webhooks_process")
      * @Method("POST")
-     
+
      * @return JsonResponse
      */
     public function processAction($token)

@@ -126,9 +126,8 @@ class CollaboratorController extends Controller
      * @Route("/collaborators/{id}/delete", name="app_projects_collaborators_delete")
      * @Method("POST")
      *
-     * @param Request      $request
-     * @param Collaborator $collaborator
-     
+     * @param  Request      $request
+     * @param  Collaborator $collaborator
      * @return JsonResponse
      */
     public function deleteAction(Request $request, Collaborator $collaborator)
