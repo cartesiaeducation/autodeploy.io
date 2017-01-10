@@ -1,0 +1,55 @@
+{% extends 'AppBundle:Project:layout.html.twig' %}
+
+{% set sidebarAction = 'slack' %}
+{% block project_title %}Slack Integration{% endblock %}
+
+{% block breadcrumb %}
+    <ul class="breadcrumb">
+        <li><a href="{{ path('app_projects') }}">{{ 'project_list.breadcrumb'|trans|desc('Projects') }}</a></li>
+        <li><a href="{{ path('app_projects_show', {id: project.id}) }}">{{ project.name }}</a></li>
+        <li class="active">Slack Integration</li>
+    </ul>
+{% endblock %}
+
+{% block project_content %}
+    <p>
+        Your can add multiple Slack WebHook for trigger some events on your Slack.
+    </p>
+
+    {% if not list|length %}
+        <p>
+            This project doesn't have any integration.
+        </p>
+        <p class="text-right">
+            <a href="{{ path('app_projects_slacks_add', {'id': project.id}) }}" class="btn btn-primary">Add Slack Integration</a>
+        </p>
+    {% else %}
+        <p class="text-right">
+            <a href="{{ path('app_projects_slacks_add', {'id': project.id}) }}" class="btn btn-primary">Add Slack Integration</a>
+        </p>
+
+        <table class="table table-striped table-hover margin-top-10">
+            <thead>
+                <tr>
+                    <th>WebHook URL</th>
+                    <th class="text-right">Enabled?</th>
+                    <th class="text-right"></th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for slack in list %}
+                    <tr>
+                        <td>{{ slack.webhookUrl }}</td>
+                        <td class="text-right">
+                            {{ slack.isEnabled ? '<span class="btn btn-sm btn-success">Yes</span>' : '<span class="btn btn-sm btn-danger">No</span>' }}
+                        </td>
+                        <td class="text-right">
+                            <a style="text-decoration: none;" href="{{ path('app_projects_slacks_edit', {'id': slack.id}) }}" class="btn btn-info btn-sm"><span class="glyphicon glyphicon-pencil"></span> EDIT</a>
+                            <button class="btn btn-danger btn-sm slack-delete" data-url="{{ path('app_projects_slacks_delete', {'id': slack.id}) }}"><i class="fa fa-trash-o"></i></button>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% endif %}
+{% endblock %}

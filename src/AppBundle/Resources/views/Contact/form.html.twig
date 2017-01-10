@@ -1,0 +1,27 @@
+{% extends '::base.html.twig' %}
+
+{% block meta_title %}{{ 'contact.meta.title'|trans|desc('autodeploy.io - Contact') }}{% endblock %}
+
+{% block content %}
+    <div class="row">
+        <div class="col-md-12">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h1 class="panel-title uppercase">{{ 'contact.title'|trans|desc('Contact us') }}</h1>
+                </div>
+                <div class="panel-body">
+                    <form action="{{ path('app_contact') }}" method="POST">
+                        {{ form_errors(form) }}
+                        {{ form_row(form.email) }}
+                        {{ form_row(form.subject) }}
+                        {{ form_row(form.message) }}
+                        {{ form_rest(form) }}
+                        <div>
+                            <input class="btn btn-primary btn-block" type="submit" value="{{ 'contact.submit'|trans|desc('Send') }}" />
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

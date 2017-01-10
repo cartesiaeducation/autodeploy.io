@@ -1,0 +1,8 @@
+User-agent: *
+Disallow: /login
+Disallow: /account
+Disallow: /cart
+
+Allow: /
+
+Sitemap: http://www.autodeploy.io/sitemap.xml

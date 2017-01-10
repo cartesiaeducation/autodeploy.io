@@ -1,0 +1,24 @@
+{
+  "name": "autodeploy.io",
+  "version": "0.0.1",
+  "authors": [
+    "Sebastien Dieunidou <s.dieunidou@gmail.com>"
+  ],
+  "description": "autodeploy.io website",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "web/assets/vendor/",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "bootstrap-sass-official": "v3.2.0+2",
+    "bootswatch-scss": "~3.2.0",
+    "fontawesome": "~4.4.0",
+    "bs-confirmation": "v1.0.1",
+    "Chart.js": "~1.0.2",
+    "select2": "~4.0.0"
+  }
+}

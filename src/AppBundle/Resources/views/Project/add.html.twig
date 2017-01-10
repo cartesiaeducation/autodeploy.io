@@ -1,0 +1,38 @@
+{% extends '::base.html.twig' %}
+{% form_theme form 'bootstrap_3_horizontal_layout.html.twig' %}
+
+{% block breadcrumb %}
+    <ul class="breadcrumb">
+        <li><a href="{{ path('app_projects') }}">{{ 'project_list.breadcrumb'|trans|desc('Projects') }}</a></li>
+        <li class="active">Add a project</li>
+    </ul>
+{% endblock %}
+
+{% block content %}
+    <div class="row">
+        <div class="col-md-12">
+            <div class="homepage-panel">
+                <div class="panel panel-default">
+                    <div class="panel-heading uppercase">Add new Project</div>
+                    <div class="panel-body">
+                        <form method="post" action="{{ path('app_projects_add') }}" class="form-horizontal">
+                            <fieldset>
+                                {{ form_errors(form) }}
+
+                                {{ form_row(form.name) }}
+                                {{ form_row(form.description) }}
+                                {{ form_row(form.repository) }}
+
+                                <div class="text-right">
+                                    {{ form_rest(form) }}
+                                    <a href="{{ path('app_projects') }}" class="btn btn-default">Cancel</a>
+                                    <button type="submit" class="btn btn-primary">Continue</button>
+                                </div>
+                            </fieldset>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,17 @@
+namespace :supervisord do
+
+  desc 'Start Supervisord'
+  task :start do
+      on release_roles :app do
+        execute :sudo, "/usr/sbin/service supervisor", "start"
+      end
+  end
+
+  desc 'Stop Supervisord'
+  task :stop do
+      on release_roles :app do
+        execute :sudo, "/usr/sbin/service supervisor", "stop"
+      end
+  end
+
+end

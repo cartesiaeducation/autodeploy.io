@@ -1,0 +1,7 @@
+AppBundle\Entity\User:
+    user_admin:
+        username:      seb
+        email:         seb@autodeploy.io
+        plainPassword: seb
+        roles:         [ROLE_SUPER_ADMIN]
+        enabled:       true

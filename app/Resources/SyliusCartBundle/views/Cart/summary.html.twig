@@ -1,0 +1,66 @@
+{% extends '::base.html.twig' %}
+{% set currency = 'EUR' %}
+{% form_theme form _self %}
+
+{% block content %}
+<div class="row">
+    <div class="col-md-12">
+        <div class="homepage-panel">
+            <div class="panel panel-default">
+                <div class="panel-heading uppercase">{{ 'cart.title'|trans|desc('Subscription') }}</div>
+                <div class="panel-body">
+                    {% if not cart.empty %}
+                        {{ form_errors(form) }}
+
+                        <table class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th>Plan</th>
+                                    <th style="text-align: right; width: 15%">Total</th>
+                                    <th style="width: 15%;"></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                            {% for item in cart.items %}
+                                <tr>
+                                    <td>
+                                        <p>{{ item.plan.name | title }}</p>
+                                    </td>
+                                    <td class="text-right">
+                                        {{ item.total }} {{ currency|raw }}
+                                    </td>
+                                    <td class="text-right">
+                                        <a href="{{ path('sylius_cart_clear') }}" class="btn btn-danger btn-sm"><i class="fa fa-trash icon-white"></i></a>
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                            <tr>
+                                <td colspan="3"></td>
+                            </tr>
+                            <tr>
+                                <td colspan="3">
+                                    <strong>Grand total</strong> <span class="pull-right">{{ cart.total }} {{ currency|raw }}</span>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                        <hr />
+                        <div class="text-right">
+                            <a href="{{ path('sylius_cart_clear') }}" class="btn btn-danger btn-sm"><i class="icon-remove"></i> clear</a>
+                        </div>
+                    {% else %}
+                        <div class="alert alert-info">
+                            Your cart is empty.
+                        </div>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block sylius_cart_item_row %}
+    {{ parent() }}
+    {% block form_message %}{% endblock %}
+{% endblock %}

@@ -1,0 +1,42 @@
+{% extends '::base.html.twig' %}
+
+{% block meta_title %}{{ 'documentation.meta.title'|trans|desc('autodeploy.io - Documentation') }}{% endblock %}
+{% block meta_description %}{{ 'documentation.meta.description'|trans|desc('Getting started with autodeploy.io') }}{% endblock %}
+{% block og_description %}{{ 'documentation.meta.description'|trans|desc('Getting started with autodeploy.io') }}{% endblock %}
+
+{% block content %}
+    <div class="row">
+        {% include 'AppBundle:Page:_summary.html.twig' %}
+        <div class="col-md-9">
+            <div class="homepage-panel">
+                <div class="panel panel-default">
+                    <div class="panel-heading uppercase">{{ 'doc.getting_started.title.main'|trans|desc('Getting Started') }}</div>
+                    <div class="panel-body">
+                        <h1 class="page-header">{{ 'doc.getting_started.title.step'|trans|desc('Getting Started: add Capistrano in your application') }}</h1>
+                        <p>
+                            {{ 'doc.getting_started.text.text1'|trans|desc('Your application require to be configured to use Capistrano.') }}<br />
+                            {{ 'doc.getting_started.text.text2'|trans|desc('Capistrano v2 and v3 are supported.') }}
+                        </p>
+                        <p class="margin-top-20">
+                            {{ 'doc.getting_started.text.text4'|trans|desc('If Capistrano was not configured on your application, you can use our wizard for initialit it in few minutes.') }}<br />
+                            {{ 'doc.getting_started.text.text5'|trans|desc('The Caspitrano wizard currently support Capostrano based configuration and plugins bower, NPM, Composer and Symfony2.') }}<br />
+                            <a target="_blank" class="btn btn-default margin-top-10" href="{{ path('app_capistrano_wizard') }}">Capistrano Wizard</a>
+                        </p>
+                        <hr />
+                        <p class="margin-top-20">
+                            {{ 'doc.getting_started.text.text3'|trans|desc('For more information about Capistrano, read the official documentation:') }}
+                        </p>
+                        <ul class="margin-top-10">
+                            <li><a href="http://capistranorb.com/documentation/getting-started/installation/" target="_blank">{{ 'doc.getting_started.link.link1'|trans|desc('Installation of Capistrano') }}</a></li>
+                            <li><a href="http://capistranorb.com/documentation/getting-started/configuration/" target="_blank">{{ 'doc.getting_started.link.link2'|trans|desc('Configuration of Capistrano') }}</a></li>
+                        </ul>
+
+                        <div class="text-right margin-top-30">
+                            <a href="{{ path('app_doc_new_project') }}" class="btn btn-info">{{ 'doc.action.next'|trans|desc('Next') }}</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

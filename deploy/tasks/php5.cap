@@ -1,0 +1,10 @@
+namespace :php5 do
+
+  desc 'Reload PHP5-FPM'
+  task :reload do
+      on release_roles :app do
+        execute :sudo, "/usr/sbin/service php5-fpm", "reload"
+      end
+  end
+
+end

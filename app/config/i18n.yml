@@ -1,0 +1,31 @@
+lexik_translation:
+    fallback_locale: %locale%        # (required) default locale to use
+    managed_locales: [%locale%, fr]  # (required) locales that the bundle have to manage
+
+jms_translation:
+    configs:
+        app:
+            dirs:             [%kernel.root_dir%, %kernel.root_dir%/../src]
+            output_dir:       %kernel.root_dir%/Resources/translations
+            ignored_domains:  [VichUploaderBundle, SonataAdminBundle]
+            excluded_names:   ["*.php"]
+            excluded_dirs:    [cache, logs, vendor]
+            output_format:    yml
+            extractors:       [jms_i18n_routing]
+
+jms_i18n_routing:
+    default_locale: en
+    locales: [en, fr]
+    strategy: prefix_except_default
+
+lunetics_locale:
+  guessing_excluded_pattern: ^/admin
+  guessing_excluded_pattern: ^/api
+  guessing_order:
+    - query
+    - router
+  allowed_locales:
+    - en
+    - fr
+  cookie:
+    set_on_change: true

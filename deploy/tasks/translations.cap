@@ -1,0 +1,8 @@
+namespace :translations do
+
+  desc 'Import new translations'
+  task :import do
+    invoke 'symfony:console', 'lexik:translations:import'
+  end
+
+end

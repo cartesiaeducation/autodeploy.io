@@ -1,0 +1,102 @@
+{% extends '::base.html.twig' %}
+
+{% block meta_title %}{{ 'capistrano_wizard.meta.title'|trans|desc('autodeploy.io - Capistrano Configurator v3') }}{% endblock %}
+{% block meta_description %}{{ 'capistrano_wizard.meta.desc'|trans|desc('Generate your Capistrano 3 configuration with our GUI wizard for your applications like Symfony2.') }}{% endblock %}
+{% block og_description %}{{ 'capistrano_wizard.meta.desc'|trans|desc('Generate your Capistrano 3 configuration with our GUI wizard for your applications like Symfony2.') }}{% endblock %}
+
+{% block form_errors %}
+    {% spaceless %}
+        {% if errors|length > 0 %}
+            <div class="alert alert-danger">
+                <ul>
+                    {% for error in errors %}
+                        <li>{{ error.message }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+        {% endif %}
+    {% endspaceless %}
+{% endblock form_errors %}
+
+{% form_theme form _self %}
+
+{% block content %}
+    <div class="row">
+        <div class="col-md-12">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h1 class="panel-title uppercase">{{ 'capistrano_wizard.title'|trans|desc('Capistrano Configurator') }}</h1>
+                </div>
+                <div class="panel-body">
+                    <p>
+                        {{ 'capistrano_wizard.text1'|trans|desc('You can use our wizard to generate your Capistrano configuration.') }}
+                    </p>
+
+                    <form method="post" class="form-horizontal margin-top-30">
+                        {{ bootstrap_set_style('horizontal') }}
+                        {{ form_errors(form, {'attr': {'class': 'alert alert-danger'}}) }}
+
+                        <fieldset>
+                            <legend>{{ 'capistrano_wizard.group.general'|trans|desc('General') }}</legend>
+                            {{ form_row(form.name) }}
+                        </fieldset>
+
+                        <fieldset class="margin-top-10">
+                            <legend>{{ 'capistrano_wizard.group.repository'|trans|desc('Repository') }}</legend>
+                            {{ form_row(form.repositoryUrl, {'help_text': 'Your repository URL.'}) }}
+                            {{ form_row(form.scm, {'help_text': 'The Source Control Management used (GIT or Subversion).'}) }}
+                            {{ form_row(form.repositoryTree, {'help_text': 'The path on the remote server where the repository should be placed.'}) }}
+                        </fieldset>
+
+                        <fieldset class="margin-top-10">
+                            <legend>{{ 'capistrano_wizard.group.setup'|trans|desc('Setup') }}</legend>
+                            {{ form_row(form.setup.keepReleases, {'help_text': 'The last n releases are kept for possible rollbacks.'}) }}
+                            {{ form_row(form.setup.directory, {'help_text': 'Main directory on your application for Capistrano files.'}) }}
+                            {{ form_row(form.setup.plugins) }}
+                        </fieldset>
+
+                        <fieldset class="margin-top-10">
+                            <legend>{{ 'capistrano_wizard.group.files'|trans|desc('Files') }}</legend>
+
+                            <div class="row">
+                                <div class="col-lg-2">
+                                    <p>
+                                        Files shared between releases<br />
+                                        <small class="help-block">(ex: app/config/parameters.yml)</small>
+                                    </p>
+                                </div>
+                                <div class="col-lg-10">
+                                    {{ form_widget(form.files.linkedFiles) }}
+                                    <p class="help-block"></p>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-lg-2">
+                                    <p>
+                                        Directories shared between releases<br />
+                                        <small class="help-block">(ex: app/logs)</small>
+                                    </p>
+                                </div>
+                                <div class="col-lg-10">
+                                    {{ form_widget(form.files.linkedDirs) }}
+                                    <p class="help-block"></p>
+                                </div>
+                            </div>
+                        </fieldset>
+
+                        <fieldset class="margin-top-30">
+                            <legend>{{ 'capistrano_wizard.group.environments'|trans|desc('Environment') }}</legend>
+                            {{ form_widget(form.environments) }}
+                        </fieldset>
+
+                        {{ form_rest(form) }}
+                        <div class="text-right margin-top-30">
+                            <button class="btn btn-primary btn-lg btn-block" type="submit">{{ 'capistrano_wizard.action.submit'|trans|desc('Generate Configuration') }}</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,44 @@
+{% extends '::base.html.twig' %}
+
+{% block meta_title %}{{ 'legal.meta.title'|trans|desc('autodeploy.io - Legal') }}{% endblock %}
+{% block meta_description %}{{ 'legal.meta.desc'|trans|desc('Legal Notice of autodeploy.io') }}{% endblock %}
+{% block og_description %}{{ 'legal.meta.desc'|trans|desc('Legal Notice of autodeploy.io') }}{% endblock %}
+
+{% block content %}
+    <div class="row">
+        <div class="col-md-12">
+            <div class="homepage-panel">
+                <div class="panel panel-default">
+                    <div class="panel-heading uppercase">{{ 'legal.title'|trans|desc('Legal Notice') }}</div>
+                    <div class="panel-body">
+                        <h1 class="page-header">{{ 'legal.title1'|trans|desc('Propriété du site') }}</h1>
+
+                        {{ 'legal.text1'|trans|desc('Le site Internet « autodeploy.io » est édité par la société HostMe SAS au capital de 3000€.') }}
+
+                        <ul class="margin-top-10">
+                            <li>SIRET : 793 073 669 00012</li>
+                            <li>{{ 'legal.text2'|trans|desc('Immatriculation') }} : Agen B 793 073 669 (47)</li>
+                            <li>TVA : FR72 793073669</li>
+                        </ul>
+
+                        <h1 class="page-header margin-top-30">{{ 'legal.title2'|trans|desc('Traitement des données personnelles') }}</h1>
+
+                        {{ 'legal.text3'|trans|desc('Conformément à l’article 34 de la loi n°78-17 du 6 janvier 1978 relative à l’informatique, aux fichiers et aux libertés, l’utilisateur dispose d’un droit d’accès, de modification, de rectification et de suppression des données qui le concernent.') }}
+
+                        <h1 class="page-header margin-top-30">{{ 'legal.title3'|trans|desc('Propriété intellectuelle') }}</h1>
+
+                        <p>
+                            {{ 'legal.text4'|trans|desc('« autodeploy.io », et en particulier son contenu, est protégé par les textes relatifs au droit de la propriété intellectuelle.') }}
+                        </p>
+                        <p>
+                            {{ 'legal.text5'|trans|desc('Sauf autorisation expresse écrite de la société « HostMe SAS », toute reproduction constitue une contrefaçon passible de sanctions pénales.') }}
+                        </p>
+                        <p>
+                            {{ 'legal.text6'|trans|desc('Toute utilisation illicite de tout ou partie de « autodeploy.io » donnera lieu à des poursuites.') }}
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

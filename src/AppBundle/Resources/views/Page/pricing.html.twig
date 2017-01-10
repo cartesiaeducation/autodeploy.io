@@ -1,0 +1,109 @@
+{% extends '::base.html.twig' %}
+
+{% block meta_title %}{{ 'pricing.meta.title'|trans|desc('autodeploy.io - Pricing') }}{% endblock %}
+{% block meta_description %}{{ 'pricing.meta.desc'|trans|desc('Check out the deals offered by autodeploy.io to automate the deployment of your applications with Capistrano.') }}{% endblock %}
+{% block og_description %}{{ 'pricing.meta.desc'|trans|desc('Check out the deals offered by autodeploy.io to automate the deployment of your applications with Capistrano.') }}{% endblock %}
+
+{% block content %}
+    <div class="row">
+        <div class="col-md-12">
+            <div class="homepage-panel">
+                <div class="panel panel-default">
+                    <div class="panel-heading uppercase">{{ 'pricing.title'|trans|desc('Pricing') }}</div>
+                    <div class="panel-body">
+                        <p>
+                            {{ 'pricing.in_dev'|trans|desc('Autodeploy.io is currently in development.') }}<br />
+                            {{ 'pricing.soon'|trans|desc('Pricing will be added soon...') }}
+                        </p>
+
+                        <div class="table-responsive">
+                            <table class="table table-striped">
+                                <thead>
+                                    <tr>
+                                        <th></th>
+                                        <th width="15%">{{ 'plan.free'|trans|desc('Free') }}</th>
+                                        <th width="15%">{{ 'plan.basic'|trans|desc('Basic') }}</th>
+                                        <th width="15%">{{ 'plan.pro'|trans|desc('Pro') }}</th>
+                                        <th width="15%">{{ 'plan.platinium'|trans|desc('Platinium') }}</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <th>{{ 'plan.options.number_of_projects'|trans|desc('Number of Projects') }}</th>
+                                        <td>2</td>
+                                        <td>10</td>
+                                        <td>50</td>
+                                        <td>{{ 'plan.options.unlimited'|trans|desc('unlimited') }}</td>
+                                    </tr>
+                                    <tr>
+                                        <th>{{ 'plan.options.tasks'|trans|desc('Tasks') }}</th>
+                                        <td>{{ 'plan.options.unlimited'|trans|desc('unlimited') }}</td>
+                                        <td>{{ 'plan.options.unlimited'|trans|desc('unlimited') }}</td>
+                                        <td>{{ 'plan.options.unlimited'|trans|desc('unlimited') }}</td>
+                                        <td>{{ 'plan.options.unlimited'|trans|desc('unlimited') }}</td>
+                                    </tr>
+                                    <tr>
+                                        <th>{{ 'plan.options.git_public'|trans|desc('Public GIT repositories') }}</th>
+                                        <td>{{ 'plan.options.yes'|trans|desc('yes') }}</td>
+                                        <td>{{ 'plan.options.yes'|trans|desc('yes') }}</td>
+                                        <td>{{ 'plan.options.yes'|trans|desc('yes') }}</td>
+                                        <td>{{ 'plan.options.yes'|trans|desc('yes') }}</td>
+                                    </tr>
+                                    <tr>
+                                        <th>{{ 'plan.options.git_private'|trans|desc('Private GIT repositories') }}</th>
+                                        <td>{{ 'plan.options.yes'|trans|desc('yes') }}</td>
+                                        <td>{{ 'plan.options.yes'|trans|desc('yes') }}</td>
+                                        <td>{{ 'plan.options.yes'|trans|desc('yes') }}</td>
+                                        <td>{{ 'plan.options.yes'|trans|desc('yes') }}</td>
+                                    </tr>
+                                    <tr>
+                                        <th>{{ 'plan.options.collaborators'|trans|desc('Collaborators') }}</th>
+                                        <td>{{ 'plan.options.unlimited'|trans|desc('unlimited') }}</td>
+                                        <td>{{ 'plan.options.unlimited'|trans|desc('unlimited') }}</td>
+                                        <td>{{ 'plan.options.unlimited'|trans|desc('unlimited') }}</td>
+                                        <td>{{ 'plan.options.unlimited'|trans|desc('unlimited') }}</td>
+                                    </tr>
+                                    <tr>
+                                        <th>{{ 'plan.options.webhooks'|trans|desc('Webhooks') }}</th>
+                                        <td>{{ 'plan.options.unlimited'|trans|desc('unlimited') }}</td>
+                                        <td>{{ 'plan.options.unlimited'|trans|desc('unlimited') }}</td>
+                                        <td>{{ 'plan.options.unlimited'|trans|desc('unlimited') }}</td>
+                                        <td>{{ 'plan.options.unlimited'|trans|desc('unlimited') }}</td>
+                                    </tr>
+                                    <tr>
+                                        <th>{{ 'plan.options.slack_integration'|trans|desc('Slack integration') }}</th>
+                                        <td>{{ 'plan.options.yes'|trans|desc('yes') }}</td>
+                                        <td>{{ 'plan.options.yes'|trans|desc('yes') }}</td>
+                                        <td>{{ 'plan.options.yes'|trans|desc('yes') }}</td>
+                                        <td>{{ 'plan.options.yes'|trans|desc('yes') }}</td>
+                                    </tr>
+                                    <tr>
+                                        <th>{{ 'plan.options.live_task'|trans|desc('Live task running') }}</th>
+                                        <td>{{ 'plan.options.yes'|trans|desc('yes') }}</td>
+                                        <td>{{ 'plan.options.yes'|trans|desc('yes') }}</td>
+                                        <td>{{ 'plan.options.yes'|trans|desc('yes') }}</td>
+                                        <td>{{ 'plan.options.yes'|trans|desc('yes') }}</td>
+                                    </tr>
+                                    <tr>
+                                        <th>{{ 'plan.options.capistrano_gui'|trans|desc('Capistrano GUI') }}</th>
+                                        <td>{{ 'plan.options.supported'|trans|desc('supported') }}</td>
+                                        <td>{{ 'plan.options.supported'|trans|desc('supported') }}</td>
+                                        <td>{{ 'plan.options.supported'|trans|desc('supported') }}</td>
+                                        <td>{{ 'plan.options.supported'|trans|desc('supported') }}</td>
+                                    </tr>
+                                    <tr>
+                                        <th>{{ 'plan.options.price'|trans|desc('Monthly Price') }}</th>
+                                        <td><strong><a style="text-decoration: none;" class="btn btn-primary" href="{{ path('app_cart_add', {'slug': 'free'}) }}">{{ 'plan.options.free'|trans|desc('Free') }}</a></strong></td>
+                                        <td><strong>N/A</strong></td>
+                                        <td><strong>N/A</strong></td>
+                                        <td><strong>N/A</strong></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

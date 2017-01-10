@@ -1,0 +1,44 @@
+{% extends "SonataAdminBundle::standard_layout.html.twig" %}
+
+{% block sonata_sidebar_search '' %}
+{% block side_bar_before_nav '' %}
+
+{% block side_bar_after_nav %}
+    <ul class="sidebar-menu">
+        <li>
+            <a href="{{ path('lexik_translation_grid') }}" target="_blank">
+                <i class="fa fa-file-text-o"></i> {{ 'admin.menu.translations'|trans|desc('Translations') }}
+            </a>
+        </li>
+        <li>
+            <a href="{{ path('lexik_mailer.email_list') }}" target="_blank">
+                <i class="fa fa-file-text-o"></i> {{ 'admin.menu.mailer'|trans|desc('Mails') }}
+            </a>
+        </li>
+    </ul>
+{% endblock side_bar_after_nav %}
+
+{% block sonata_top_nav_menu %}
+    <div class="navbar-right">
+        <ul class="nav navbar-top-links breadcrumb">
+            <li>
+                <a href="{{ path('homepage') }}">
+                    <i class="fa fa-backward"></i> {{ 'admin.action.back'|trans|desc('Back to website') }}
+                </a>
+            </li>
+            <li>
+                <a href="{{ path('fos_user_security_logout') }}">
+                    <i class="fa fa-sign-out"></i> {{ 'admin.action.logout'|trans|desc('Logout') }}
+                </a>
+            </li>
+        </ul>
+    </div>
+{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+{% endblock javascripts %}

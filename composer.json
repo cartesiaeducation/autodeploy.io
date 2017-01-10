@@ -1,0 +1,89 @@
+{
+    "name": "seb/autodeploy.io",
+    "description": "autodeploy.io website",
+    "license": "proprietary",
+    "type": "project",
+    "autoload": {
+        "psr-4": {
+            "": "src/",
+            "SymfonyStandard\\": "app/SymfonyStandard/"
+        }
+    },
+    "require": {
+        "php": ">=5.3.9",
+        "symfony/symfony": "2.8.*",
+        "doctrine/orm": "^2.5.1",
+        "doctrine/doctrine-bundle": "~1.5.1",
+        "symfony/assetic-bundle": "~2.3",
+        "symfony/swiftmailer-bundle": "~2.3",
+        "symfony/monolog-bundle": "~2.4",
+        "sensio/distribution-bundle": "~4.0",
+        "sensio/framework-extra-bundle": "^3.0.2",
+        "doctrine/doctrine-migrations-bundle": "^1.0",
+        "stof/doctrine-extensions-bundle": "^1.2",
+        "friendsofsymfony/user-bundle": "~2.0@dev",
+        "incenteev/composer-parameter-handler": "~2.0",
+        "oldsound/rabbitmq-bundle": "^1.7",
+        "sinner/phpseclib-bundle": "@dev",
+        "oneup/acl-bundle": "^0.13.0",
+        "wisembly/elephant.io": "dev-master",
+        "maknz/slack": "^1.7",
+        "sonata-project/admin-bundle": "^2.3",
+        "sonata-project/doctrine-orm-admin-bundle": "^2.3",
+        "jms/translation-bundle": "^1.1",
+        "lexik/translation-bundle": "dev-master#8c15d399552fdef0f8cca2d9f559792456649a57",
+        "jms/i18n-routing-bundle": "^1.1",
+        "lexik/mailer-bundle": "^2.0",
+        "lunetics/locale-bundle": "^2.4",
+        "hwi/oauth-bundle": "dev-master",
+        "beberlei/DoctrineExtensions": "^1.0",
+        "sylius/cart-bundle": "^0.15.0",
+        "friendsofsymfony/rest-bundle": "^1.7",
+        "braincrafted/bootstrap-bundle": "^2.1",
+        "pyrech/composer-changelogs": "^1.1",
+        "raven/raven": "^0.13.0",
+        "sensiolabs/ansi-to-html": "^1.1",
+        "corley/influxdb-sdk": "^0.9.2",
+        "mtxserv/metric-bundle": "@dev"
+    },
+    "require-dev": {
+        "sensio/generator-bundle": "~2.3",
+        "hautelook/alice-bundle": "^0.2.0",
+        "phpunit/phpunit": "^4.8",
+        "doctrine/doctrine-fixtures-bundle": "^2.2"
+    },
+    "scripts": {
+        "post-root-package-install": [
+            "SymfonyStandard\\Composer::hookRootPackageInstall"
+        ],
+        "post-install-cmd": [
+            "Incenteev\\ParameterHandler\\ScriptHandler::buildParameters",
+            "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::buildBootstrap",
+            "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::clearCache",
+            "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::installAssets",
+            "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::installRequirementsFile",
+            "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::removeSymfonyStandardFiles",
+            "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::prepareDeploymentTarget"
+        ],
+        "post-update-cmd": [
+            "Incenteev\\ParameterHandler\\ScriptHandler::buildParameters",
+            "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::buildBootstrap",
+            "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::clearCache",
+            "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::installAssets",
+            "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::installRequirementsFile",
+            "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::removeSymfonyStandardFiles",
+            "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::prepareDeploymentTarget"
+        ]
+    },
+    "config": {
+        "bin-dir": "bin"
+    },
+    "extra": {
+        "symfony-app-dir": "app",
+        "symfony-web-dir": "web",
+        "symfony-assets-install": "symlink",
+        "incenteev-parameters": {
+            "file": "app/config/parameters.yml"
+        }
+    }
+}

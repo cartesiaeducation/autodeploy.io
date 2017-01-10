@@ -1,0 +1,32 @@
+change_password:
+    # Desc: Change my password
+    title: 'Change my password'
+
+login_activated:
+    # Desc: Account Activated
+    title: 'Account Activated'
+
+register:
+    # Desc: Create free account
+    title: 'Create free account'
+
+registration:
+    back: registration.back
+    confirmed: registration.confirmed
+
+request_password:
+    # Desc: Request new password
+    title: 'Request new password'
+
+resetting:
+    request:
+        invalid_username: resetting.request.invalid_username
+        submit: resetting.request.submit
+        username: resetting.request.username
+
+    reset:
+        submit: resetting.reset.submit
+
+security:
+    login:
+        password: security.login.password

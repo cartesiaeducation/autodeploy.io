@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="{{ app.request.locale }}">
+<head>
+    <title>{% block meta_title %}{{ 'meta.title'|trans|desc('autodeploy.io - Automated Deployment') }}{% endblock %}</title>
+
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="robots" content="index, follow" />
+    <meta name="google-site-verification" content="pmsp6YPb-c70tZRGsFi8nu5N8XU__6Xb-FDfbffkUvs" />
+    <meta name="description" content="{% block meta_description %}{{ 'meta.description'|trans|desc('autodeploy.io is an automated deployment platform build on the top of Capistrano for your applications, fast and simple to use.') }}{% endblock %}" />
+    <meta name="og:description" content="{% block og_description %}{{ 'meta.description'|trans|desc('autodeploy.io is an automated deployment platform build on the top of Capistrano for your applications, fast and simple to use.') }}{% endblock %}" />
+    <meta property="fb:admins" content="715004862" />
+    <meta property="og:site_name" content="autodeploy.io" />
+    <meta property="og:url" content="http://www.autodeploy.io/" />
+    <meta property="og:type" content="website" />
+
+    {% block stylesheets %}
+        <link rel="stylesheet" href="{{ asset('assets/vendor/fontawesome/css/font-awesome.min.css') }}">
+
+        {% stylesheets output='assets/style.css' filter='?cssrewrite' filter='?uglifycss'
+            '@AppBundle/Resources/public/scss/bootstrap.scss'
+            '@AppBundle/Resources/public/scss/theme.scss'
+            'assets/vendor/select2/dist/css/select2.min.css'
+        %}
+            <link rel="stylesheet" href="{{ asset_url }}" />
+        {% endstylesheets %}
+        {{ bootstrap_get_style() }}
+    {% endblock %}
+
+    <!-- HTML5 Shim and Respond.js add IE8 support of HTML5 elements and media queries -->
+    {% include 'BraincraftedBootstrapBundle::ie8-support.html.twig' %}
+
+    <link rel="alternate" hreflang="en" href="{{ url('homepage', {'_locale': 'en'}) }}" />
+    <link rel="alternate" hreflang="fr" href="{{ url('homepage', {'_locale': 'fr'}) }}" />
+
+</head>
+<body>
+    {% if app.environment == 'prod' %}
+        <!-- Google Tag Manager -->
+        <noscript><iframe src="//www.googletagmanager.com/ns.html?id={{ google_gtm_id }}" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+        <script>
+            (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+                    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+                    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+                    '//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+            })(window,document,'script','dataLayer','{{ google_gtm_id }}');
+        </script>
+        <!-- End Google Tag Manager -->
+    {% endif %}
+
+    <div class="navbar navbar-default navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <a href="{{ path('homepage') }}" class="navbar-brand">autodeploy.io</a>
+                <button class="navbar-toggle" type="button" data-toggle="collapse" data-target="#navbar-main">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+            </div>
+            <div class="navbar-collapse collapse" id="navbar-main">
+                <ul class="nav navbar-nav">
+                    <li><a href="{{ path('app_features') }}" class="uppercase">{{ 'layout.menu.feature'|trans|desc('Features') }}</a></li>
+                    <li><a href="{{ path('app_pricing') }}" class="uppercase">{{ 'layout.menu.pricing'|trans|desc('Pricing') }}</a></li>
+                    <li><a href="{{ path('app_documentations') }}" class="uppercase">{{ 'layout.menu.doc'|trans|desc('Documentation') }}</a></li>
+                    <li><a href="{{ path('app_capistrano_wizard') }}" class="uppercase">{{ 'layout.menu.wizard'|trans|desc('Wizard') }}</a></li>
+                    <li><a href="{{ path('app_contact') }}" class="uppercase">{{ 'layout.menu.contact'|trans|desc('Contact') }}</a></li>
+                </ul>
+                {% block nav_context_user %}
+                <ul class="nav navbar-nav navbar-right">
+                    <li class="dropdown">
+                        <a class="dropdown-toggle uppercase" data-toggle="dropdown" href="#">
+                            <img src="{{ asset('/bundles/app/img/lang/' ~ app.request.locale ~ '.png') }}" alt="{{ app.request.locale | upper }}" />
+                            <span class="caret"></span>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a href="{{ path('homepage', {'_locale': 'fr'}) }}"><img src="{{ asset('/bundles/app/img/lang/fr.png') }}" alt="Français" width="16" height="11" /> Français</a></li>
+                            <li><a href="{{ path('homepage', {'_locale': 'en'}) }}"><img src="{{ asset('/bundles/app/img/lang/en.png') }}" alt="English" width="16" height="11" /> English</a></li>
+                        </ul>
+                    </li>
+
+                    {{ render_esi(controller('AppBundle:Home:logged')) }}
+                </ul>
+                {% endblock %}
+            </div>
+        </div>
+    </div>
+
+    <div {% block content_class 'id="content" ' %}class="container">
+        {% block breadcrumb '' %}
+
+        {% for type, flashMessages in app.session.flashbag.all() %}
+            {% for flashMessage in flashMessages %}
+                <div class="alert alert-{{ type }} alert-dismissible fade in" role="alert">
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>
+                    {{ flashMessage }}
+                </div>
+            {% endfor %}
+        {% endfor %}
+
+        {% block content '' %}
+    </div>
+
+    <div class="margin-top-20 text-center">
+        <small>
+            {{ 'layout.copyright'|trans|desc('© 2016 All rights reserved') }} - <a style="color: #555555;" href="{{ path('app_legal') }}">{{ 'layout.legal'|trans|desc('legal notice') }}</a>
+        </small>
+    </div>
+
+    {% block javascripts %}
+        {% javascripts filter='?uglifyjs2' output="assets/autodeploy.js"
+        'assets/vendor/jquery/dist/jquery.min.js'
+        'assets/vendor/bootstrap-sass-official/assets/javascripts/bootstrap.js'
+        'assets/vendor/bs-confirmation/bootstrap-confirmation.js'
+        'assets/vendor/Chart.js/Chart.min.js'
+        '@AppBundle/Resources/public/js/app.js'
+        '@BraincraftedBootstrapBundle/Resources/js/bc-bootstrap-collection.js'
+        'assets/vendor/select2/dist/js/select2.min.js'
+        %}
+        <script src="{{ asset_url }}"></script>
+        {% endjavascripts %}
+
+        {% block additionnalJavascript '' %}
+    {% endblock %}
+</body>
+</html>

@@ -1,0 +1,8 @@
+namespace :doctrine do
+
+  desc 'Database migrations execute'
+  task :migrate do
+    invoke 'symfony:console', 'doctrine:migrations:migrate', '--no-interaction'
+  end
+
+end

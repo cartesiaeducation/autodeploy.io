@@ -1,0 +1,70 @@
+# To get started with security, check out the documentation:
+# http://symfony.com/doc/current/book/security.html
+security:
+    acl:
+        connection: default
+
+    encoders:
+        FOS\UserBundle\Model\UserInterface: bcrypt
+
+    role_hierarchy:
+        ROLE_ADMIN:
+            - ROLE_USER
+            - ROLE_SONATA_ADMIN
+        ROLE_SUPER_ADMIN:
+            - ROLE_ADMIN
+            - ROLE_USER
+            - ROLE_SONATA_ADMIN
+
+    providers:
+        fos_userbundle:
+            id: app.user_provider.email
+
+    firewalls:
+        dev:
+            pattern:  ^/(_(profiler|wdt)|css|images|js)/
+            security: false
+
+        main:
+            pattern: ^/
+            form_login:
+                provider:      fos_userbundle
+                csrf_provider: security.csrf.token_manager
+                login_path:    fos_user_security_login
+                check_path:    fos_user_security_check
+                success_handler: app.login_success_handler
+                remember_me: true
+            oauth:
+                resource_owners:
+                    github:           "/login/check-github"
+                    bitbucket:        "/login/check-bitbucket"
+                login_path:        /login
+                failure_path:      /login
+                oauth_user_provider:
+                    #this is my custom user provider, created from FOSUBUserProvider - will manage the
+                    #automatic user registration on your site, with data from the provider (facebook. google, etc.)
+                    service: app.oauth.user_provider
+                success_handler: app.login_success_handler
+            logout:
+                path:   fos_user_security_logout
+            anonymous:    true
+            remember_me:
+                key:      "%secret%"
+                lifetime: 604800 # 1 week in seconds
+                user_provider: fos_userbundle
+                path: /
+                always_remember_me: true
+
+    access_control:
+        - { path: ^/admin, role: ROLE_SUPER_ADMIN }
+        - { path: ^/(fr\/)?projects, role: ROLE_USER }
+        - { path: ^/(fr\/)?tasks, role: ROLE_USER }
+        - { path: ^/(fr\/)?webhooks, role: ROLE_USER }
+        - { path: ^/(fr\/)?slacks, role: ROLE_USER }
+        - { path: ^/(fr\/)?history, role: ROLE_USER }
+        - { path: ^/(fr\/)?environments, role: ROLE_USER }
+        - { path: ^/(fr\/)?collaborators, role: ROLE_USER }
+        - { path: ^/(fr\/)?authentifications, role: ROLE_USER }
+        - { path: ^/(fr\/)?account/change-password, role: ROLE_USER }
+        - { path: ^/(fr\/)?logout, role: ROLE_USER }
+        - { path: ^/, role: IS_AUTHENTICATED_ANONYMOUSLY }

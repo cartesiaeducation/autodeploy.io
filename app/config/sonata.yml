@@ -1,0 +1,20 @@
+sonata_block:
+    default_contexts: [cms]
+    blocks:
+        # enable the SonataAdminBundle block
+        sonata.admin.block.admin_list:
+            contexts:   [admin]
+
+sonata_admin:
+    title:                autodeploy.io
+    #title_logo:           /favicon.ico
+
+    options:
+        title_mode: single_text
+        use_select2: true
+
+    templates:
+        layout: ::layout_admin.html.twig
+
+    security:
+        handler: sonata.admin.security.handler.role

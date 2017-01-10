@@ -1,0 +1,22 @@
+<div class="col-md-3">
+    <div class="homepage-panel">
+        <div class="panel panel-default">
+            <div class="panel-heading uppercase">{{ 'documentation.title'|trans|desc('Documentation') }}</div>
+            <div class="panel-body">
+                <h1 class="page-header">{{ 'documentation.nav.summary'|trans|desc('Summary') }}</h1>
+                <ul class="list-unstyled">
+                    <li><a href="{{ path('app_documentations') }}">{{ 'documentation.nav.getting_started'|trans|desc('Getting Started') }}</a></li>
+                    <li><a href="{{ path('app_doc_new_project') }}">{{ 'documentation.nav.new_project'|trans|desc('Create a new project') }}</a></li>
+                    <li><a href="{{ path('app_doc_git_authentification') }}">{{ 'documentation.nav.git_key'|trans|desc('Install GIT deployment Key') }}</a></li>
+                    {#
+                    <li><a href="#navbar">{{ 'documentation.nav.env_key'|trans|desc('Install environement deployment Key') }}</a></li>
+                    #}
+                </ul>
+                <h1 class="page-header margin-top-30">{{ 'documentation.nav.cookbook'|trans|desc('Cookbook') }}</h1>
+                <ul class="list-unstyled">
+                    <li><a href="{{ path('app_doc_symfony2') }}">{{ 'documentation.nav.symfony2'|trans|desc('Configure Symfony2 application') }}</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,31 @@
+{% extends 'AppBundle:Project:layout.html.twig' %}
+{% form_theme form 'bootstrap_3_horizontal_layout.html.twig' %}
+
+{% set sidebarAction = 'environments' %}
+{% block project_title %}Edit environment {{ environment.name }}{% endblock %}
+
+{% block breadcrumb %}
+    <ul class="breadcrumb">
+        <li><a href="{{ path('app_projects') }}">{{ 'project_list.breadcrumb'|trans|desc('Projects') }}</a></li>
+        <li><a href="{{ path('app_projects_show', {id: project.id}) }}">{{ project.name }}</a></li>
+        <li><a href="{{ path('app_project_environments', {id: project.id}) }}">Environments</a></li>
+        <li class="active">Edit environment {{ environment.name }}</li>
+    </ul>
+{% endblock %}
+
+{% block project_content %}
+    <form method="post" action="{{ path('app_projects_environments_edit', {id: environment.id}) }}" class="form-horizontal margin-top-30">
+        <fieldset>
+            {{ form_errors(form) }}
+
+            {{ form_row(form.name) }}
+
+            <div class="text-right">
+                {{ form_rest(form) }}
+                <a href="{{ path('app_project_environments', {id: project.id}) }}" class="btn btn-default">Cancel</a>
+                <a data-toggle="confirmation" data-href="{{ path('app_project_environments_delete', {id: environment.id}) }}" class="btn btn-danger env-delete">Delete</a>
+                <button type="submit" class="btn btn-primary">Continue</button>
+            </div>
+        </fieldset>
+    </form>
+{% endblock %}

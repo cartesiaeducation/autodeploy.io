@@ -1,0 +1,179 @@
+# Desc: /contact
+app_contact: /contact
+
+# Desc: /docs/git-authentification
+app_doc_git_authentification: /docs/git-authentification
+
+# Desc: /docs/create-new-project
+app_doc_new_project: /docs/creer-un-project
+
+# Desc: /docs/cookbook-symfony2-capistrano
+app_doc_symfony2: /docs/cookbook-symfony2-capistrano   # FIXME
+
+# Desc: /docs
+app_documentations: /docs
+
+# Desc: /features
+app_features: /fonctionnalites
+
+# Desc: /pricing
+app_pricing: /offres
+
+# Desc: /authentifications/{id}/add
+app_project_authentification_add: '/authentifications/{id}/add'
+
+# Desc: /authentifications/{id}
+app_project_authentification_list: '/authentifications/{id}'
+
+# Desc: /environments/{id}
+app_project_environments: '/environments/{id}'
+
+# Desc: /environments/{id}/delete
+app_project_environments_delete: '/environments/{id}/delete'
+
+# Desc: /history/{id}
+app_project_history: '/history/{id}'
+
+# Desc: /history/{id}/show
+app_project_history_show: '/history/{id}/show'
+
+# Desc: /tasks/{id}/run
+app_project_queue_add: '/tasks/{id}/run'
+
+# Desc: /authentifications/{id}/regenerate
+app_project_repository_regenerate: '/authentifications/{id}/regenerate'
+
+# Desc: /slacks/{id}
+app_project_slacks: '/slacks/{id}'
+
+# Desc: /tasks/{id}
+app_project_tasks: '/tasks/{id}'
+
+# Desc: /tasks/{id}/update
+app_project_tasks_update: '/tasks/{id}/update'
+
+# Desc: /webhooks/{id}
+app_project_webhooks: '/webhooks/{id}'
+
+# Desc: /projects/
+app_projects: /projects/
+
+# Desc: /projects/add
+app_projects_add: /projects/add
+
+# Desc: /projects/show/{id}/check-permissions
+app_projects_check_permissions: '/projects/show/{id}/check-permissions'
+
+# Desc: /collaborators/{id}
+app_projects_collaborators: '/collaborators/{id}'
+
+# Desc: /collaborators/{id}/add
+app_projects_collaborators_add: '/collaborators/{id}/add'
+
+# Desc: /collaborators/{id}/delete
+app_projects_collaborators_delete: '/collaborators/{id}/delete'
+
+# Desc: /projects/{id}/delete
+app_projects_delete: '/projects/{id}/delete'
+
+# Desc: /projects/edit/{id}
+app_projects_edit: '/projects/edit/{id}'
+
+# Desc: /environments/{id}/add
+app_projects_environments_add: '/environments/{id}/add'
+
+# Desc: /environments/{id}/edit
+app_projects_environments_edit: '/environments/{id}/edit'
+
+# Desc: /environments/{id}/regenerate
+app_projects_environments_regenerate: '/environments/{id}/regenerate'
+
+# Desc: /projects/show/{id}
+app_projects_show: '/projects/show/{id}'
+
+# Desc: /slacks/{id}/add
+app_projects_slacks_add: '/slacks/{id}/add'
+
+# Desc: /slacks/{id}/delete
+app_projects_slacks_delete: '/slacks/{id}/delete'
+
+# Desc: /slacks/{id}/edit
+app_projects_slacks_edit: '/slacks/{id}/edit'
+
+# Desc: /projects/show/{id}/state-permissions
+app_projects_state_permissions: '/projects/show/{id}/state-permissions'
+
+# Desc: /webhooks/{id}/add
+app_projects_webhooks_add: '/webhooks/{id}/add'
+
+# Desc: /webhooks/{id}/delete
+app_projects_webhooks_delete: '/webhooks/{id}/delete'
+
+# Desc: /webhooks/{id}/edit
+app_projects_webhooks_edit: '/webhooks/{id}/edit'
+
+# Desc: /webhook-process/{token}
+app_projects_webhooks_process: '/webhook-process/{token}'
+
+# Desc: /login/check-bitbucket
+bitbucket_login: /login/check-bitbucket
+
+# Desc: /account/change-password
+fos_user_change_password: /account/change-password
+
+# Desc: /account/edit
+fos_user_profile_edit: /account/edit
+
+# Desc: /account/edit
+fos_user_profile_show: /account/edit
+
+# Desc: /register/check-email
+fos_user_registration_check_email: /inscription/check-email
+
+# Desc: /register/confirm/{token}
+fos_user_registration_confirm: '/inscription/confirm/{token}'
+
+# Desc: /register/confirmed
+fos_user_registration_confirmed: /inscription/success
+
+# Desc: /register/
+fos_user_registration_register: /inscription/
+
+# Desc: /account/check-email
+fos_user_resetting_check_email: /account/check-email
+
+# Desc: /account/request
+fos_user_resetting_request: /account/request
+
+# Desc: /account/reset/{token}
+fos_user_resetting_reset: '/account/reset/{token}'
+
+# Desc: /account/send-email
+fos_user_resetting_send_email: /account/send-email
+
+# Desc: /login_check
+fos_user_security_check: /login_check
+
+# Desc: /login
+fos_user_security_login: /login
+
+# Desc: /logout
+fos_user_security_logout: /logout
+
+# Desc: /login/check-github
+github_login: /login/check-github
+
+# Desc: /
+homepage: /
+
+# Desc: /login/
+hwi_oauth_connect: /login/
+
+# Desc: /login/registration/{key}
+hwi_oauth_connect_registration: '/login/registration/{key}'
+
+# Desc: /login/service/{service}
+hwi_oauth_connect_service: '/login/service/{service}'
+
+# Desc: /login/{service}
+hwi_oauth_service_redirect: '/login/{service}'

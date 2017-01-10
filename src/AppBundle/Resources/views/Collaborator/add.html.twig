@@ -1,0 +1,58 @@
+{% extends 'AppBundle:Project:layout.html.twig' %}
+{% form_theme form 'bootstrap_3_horizontal_layout.html.twig' %}
+
+{% set sidebarAction = 'collaborators' %}
+{% block project_title %}Add a collaborator{% endblock %}
+
+{% block breadcrumb %}
+    <ul class="breadcrumb">
+        <li><a href="{{ path('app_projects') }}">{{ 'project_list.breadcrumb'|trans|desc('Projects') }}</a></li>
+        <li><a href="{{ path('app_projects_show', {id: project.id}) }}">{{ project.name }}</a></li>
+        <li><a href="{{ path('app_projects_collaborators', {id: project.id}) }}">Collaborators</a></li>
+        <li class="active">Add a new collaborator</li>
+    </ul>
+{% endblock %}
+
+{% block project_content %}
+    <div class="row">
+
+        <div class="col-md-6">
+            <h5 class="page-header uppercase">Add an existing user</h5>
+            <p>
+                You want to add an user which already have an account on autodeploy.io ?
+            </p>
+            <form method="post" action="{{ path('app_projects_collaborators_add', {id: project.id}) }}" class="margin-top-30">
+                <fieldset>
+                    {{ form_errors(form) }}
+                    {{ form_row(form.user) }}
+                    {{ form_rest(form) }}
+                    <div class="text-right form-group">
+                        <div class="col-sm-12 margin-top-10">
+                            <button type="submit" class="btn btn-primary">Add existing user</button>
+                        </div>
+                    </div>
+                </fieldset>
+            </form>
+        </div>
+
+        <div class="col-md-6">
+            <h5 class="page-header uppercase">Create a new user</h5>
+            <p>
+                Add a new user which doesn't have an account on autodeploy.io.
+            </p>
+            <form method="post" action="{{ path('app_projects_collaborators_add', {id: project.id}) }}" class="margin-top-30">
+                <fieldset>
+                    {{ form_errors(formNewUser) }}
+                    {{ form_row(formNewUser.username) }}
+                    {{ form_row(formNewUser.email) }}
+                    {{ form_rest(formNewUser) }}
+                    <div class="text-right form-group">
+                        <div class="col-sm-12 margin-top-10">
+                            <button type="submit" class="btn btn-primary">Create new user</button>
+                        </div>
+                    </div>
+                </fieldset>
+            </form>
+        </div>
+    </div>
+{% endblock %}

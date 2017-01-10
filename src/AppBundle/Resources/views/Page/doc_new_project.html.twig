@@ -1,0 +1,55 @@
+{% extends '::base.html.twig' %}
+
+{% block meta_title %}{{ 'doc.new_project.meta.title'|trans|desc('autodeploy.io - Create a new project with Capistrano') }}{% endblock %}
+{% block meta_description %}{{ 'doc.new_project.meta.description'|trans|desc('Create a new project with autodeploy.io') }}{% endblock %}
+{% block og_description %}{{ 'doc.new_project.meta.description'|trans|desc('Create a new project with autodeploy.io') }}{% endblock %}
+
+{% block content %}
+    <div class="row">
+        {% include 'AppBundle:Page:_summary.html.twig' %}
+        <div class="col-md-9">
+            <div class="homepage-panel">
+                <div class="panel panel-default">
+                    <div class="panel-heading uppercase">{{ 'doc.new_project.title.main'|trans|desc('Create a new project') }}</div>
+                    <div class="panel-body">
+                        <h1 class="page-header">{{ 'doc.new_project.title.step'|trans|desc('Create a new project') }}</h1>
+                        <p>
+                            {{ 'doc.new_project.text.text1'|trans|desc('autodeploy.io is fast and simple to use. You can add your application configured with Capistrano in few minutes.') }}
+                        </p>
+                        <p>
+                            {{ 'doc.new_project.text.text2'|trans|desc('First step, log-in on the website, and go to "my projects" and click on "add new project".') }}
+                        </p>
+                        <p class="margin-top-30">
+                            {{ 'doc.new_project.text.text3'|trans|desc('Fill the form with following data:')}}
+                        </p>
+                        <table class="table table-stipped">
+                            <tbody>
+                                <tr>
+                                    <th>{{ 'doc.new_project.list.name'|trans|desc('Name')}}</th>
+                                    <td>{{ 'doc.new_project.list.name_text'|trans|desc('name of the project')}}</td>
+                                </tr>
+                                <tr>
+                                    <th>{{ 'doc.new_project.list.desc'|trans|desc('Description')}}</th>
+                                    <td>{{ 'doc.new_project.list.desc_text'|trans|desc('description of the project')}}</td>
+                                </tr>
+                                <tr>
+                                    <th>{{ 'doc.new_project.list.git'|trans|desc('Repository')}}</th>
+                                    <td>{{ 'doc.new_project.list.git_text'|trans|desc('SSH url of GIT repository (ex: git@github.com:symfony/symfony.git)')}}</td>
+                                </tr>
+                                <tr>
+                                    <th>{{ 'doc.new_project.list.branch'|trans|desc('Branch')}}</th>
+                                    <td>{{ 'doc.new_project.list.branch_text'|trans|desc('main branch of repository (ex: master)')}}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                        <div class="text-right margin-top-30">
+                            <a href="{{ path('app_documentations') }}" class="btn btn-info pull-left">{{ 'doc.action.previous'|trans|desc('Previous') }}</a>
+                            <a href="{{ path('app_doc_git_authentification') }}" class="btn btn-info pull-right">{{ 'doc.action.next'|trans|desc('Next') }}</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,144 @@
+{% extends '::base.html.twig' %}
+
+{% block meta_title %}{{ 'doc.symfony.meta.title'|trans|desc('autodeploy.io - Configure Capistrano 3 for Symfony2') }}{% endblock %}
+{% block meta_description %}{{ 'doc.symfony.meta.description'|trans|desc('Configure Capistrano 3 for your Symfony2 Application') }}{% endblock %}
+{% block og_description %}{{ 'doc.symfony.meta.description'|trans|desc('Configure Capistrano 3 for your Symfony2 Application') }}{% endblock %}
+
+{% block content %}
+    <div class="row">
+        {% include 'AppBundle:Page:_summary.html.twig' %}
+        <div class="col-md-9">
+            <div class="homepage-panel">
+                <div class="panel panel-default">
+                    <div class="panel-heading uppercase">{{ 'doc.symfony.title.main'|trans|desc('Configure Capistrano 3 for your Symfony2 Application') }}</div>
+                    <div class="panel-body">
+                        <h1 class="page-header">{{ 'doc.symfony.title.step'|trans|desc('What is Capistrano?') }}</h1>
+                        <p>
+                            {{ 'doc.symfony.text.text1'|trans|desc('Capistrano is a remote server automation tool supporting scripting and execution of arbitrary tasks.') }}
+                        </p>
+                        <p>
+                            {{ 'doc.symfony.text.text2'|trans|desc('Fore more information, read the official documentation:') }}
+                             <a href="http://capistranorb.com/documentation/overview/what-is-capistrano/" target="_blank">{{ 'doc.symfony.text.text3'|trans|desc('what is Capistrano?') }}</a>
+                        </p>
+
+                        <h1 class="page-header margin-top-30">{{ 'doc.symfony.title.configure'|trans|desc('Configure Capistrano for Symfony2 app') }}</h1>
+
+                        <h2>{{ 'doc.symfony.title.structure'|trans|desc('Structure') }}</h2>
+                        <p>
+                            {{ 'doc.symfony.text.text4'|trans|desc('Capistrano uses a strictly defined directory hierarchy on each remote server to organise the source code and other deployment-related data.') }}
+                        </p>
+                        <pre>├── current -> /var/www/my_app_name/releases/20150120114500/
+├── releases
+│   ├── 20150080072500
+│   ├── 20150090083000
+│   ├── 20150100093500
+│   ├── 20150110104000
+│   └── 20150120114500
+├── revisions.log
+└── shared</pre>
+                        <h2 class="margin-top-50">{{ 'doc.symfony.title.install'|trans|desc('Install Capistrano on your system') }}</h2>
+                        <p>
+                            {{ 'doc.symfony.text.text5'|trans|desc('Ruby is required for use Capistrano.') }}
+                        </p>
+
+                        <pre>sudo gem install capistrano</pre>
+
+                        <h2 class="margin-top-50">{{ 'doc.symfony.title.initialize'|trans|desc('Initialize Capistrano project') }}</h2>
+
+                        <pre>cd my-project
+cap install</pre>
+
+                        <p>
+                            {{ 'doc.symfony.text.text6'|trans|desc('This will create a bunch of files, the important ones are:') }}
+                        </p>
+
+                        <pre>├── Capfile
+├── config
+│   ├── deploy
+│   │   ├── production.rb
+│   │   └── staging.rb
+│   └── deploy.rb
+└── lib
+    └── capistrano
+            └── tasks</pre>
+
+                        <p class="margin-top-30">{{ 'doc.symfony.text.text7'|trans|desc('Edit Capfile and add on bottom:') }}</p>
+
+                        <pre>
+require 'capistrano/composer'
+require 'capistrano/symfony'</pre>
+
+                        <p>{{ 'doc.symfony.text.text8'|trans|desc('If needed, you can add NPM and/or Bower packages :') }}</p>
+
+                        <pre>
+require 'capistrano/npm'
+require 'capistrano/bower'</pre>
+
+                        <h2 class="margin-top-50">{{ 'doc.symfony.title.config_deploy'|trans|desc('Configure deployment') }}</h2>
+
+                        <p>
+                            {{ 'doc.symfony.text.text9'|trans|desc('This is an example on configuration for Symfony2.') }}
+                        </p>
+                        <p>
+                            {{ 'doc.symfony.text.text10'|trans|desc('You can paste this in config/deploy.rb') }}
+                        </p>
+                        <pre>lock '3.4.0'
+
+set :application, 'MyApplicationName'
+set :repo_url, 'git@github.com:my-user/my-repository.io.git'
+set :linked_files, %w{app/config/parameters.yml}
+set :linked_dirs, %w{app/logs vendor web/vendor node_modules web/assets}
+
+set :format, :pretty
+set :log_level, :debug
+set :keep_releases, 5
+
+after 'deploy:starting', 'composer:install_executable'
+after 'deploy:updated', 'npm:install'   # remove it if you don't use npm
+after 'deploy:updated', 'bower:install' # remove it if you don't use bower
+after 'deploy:updated', 'symfony:assets:install'
+after 'deploy:updated', 'symfony:assetic:dump'
+</pre>
+
+                        <h2 class="margin-top-50">{{ 'doc.symfony.title.envs'|trans|desc('Configure Environments') }}</h2>
+
+                        <p>
+                            {{ 'doc.symfony.text.text11'|trans|desc('Edit config/deploy/production.rb :') }}
+                        </p>
+
+                        <pre>set :stage, :prod
+set :symfony_env, "prod"
+
+set :branch, 'master' # your production branch
+set :deploy_to, '/home/myproject/www' # path on production server
+
+set :controllers_to_clear, ["app_*.php"]
+set :composer_install_flags, '--prefer-dist --no-interaction --optimize-autoloader'
+
+server 'www.mywebsite.com', user: 'mysshuser', port: 22, roles: %w{app db web} # edit IP / Port and SSH user of your production server
+SSHKit.config.command_map[:composer] = "php #{shared_path.join("composer.phar")}"
+</pre>
+
+                        <p class="margin-top-30">
+                            {{ 'doc.symfony.text.text12'|trans|desc('If you have a staging environment, edit config/deploy/staging.rb :') }}
+                        </p>
+
+                        <pre>set :stage, :staging
+set :symfony_env, "staging"
+
+set :branch, 'develop' # your development branch
+set :deploy_to, '/home/myproject/www' # path on staging server
+
+set :controllers_to_clear, []
+set :composer_install_flags, '--prefer-dist --no-interaction --optimize-autoloader'
+
+server 'staging.mywebsite.com', user: 'mysshuser', port: 22, roles: %w{app db web}# edit IP / Port and SSH user of your staging server
+SSHKit.config.command_map[:composer] = "php #{shared_path.join("composer.phar")}"
+</pre>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

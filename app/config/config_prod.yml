@@ -1,0 +1,46 @@
+imports:
+    - { resource: config.yml }
+
+framework:
+    validation:
+        cache: validator.mapping.cache.apc
+    serializer:
+        cache: serializer.mapping.cache.apc
+
+doctrine:
+    orm:
+        metadata_cache_driver: apc
+        result_cache_driver: apc
+        query_cache_driver: apc
+
+monolog:
+  handlers:
+    main:
+        type:         fingers_crossed
+        action_level: error
+        handler:      grouped_main
+
+    sentry:
+        type:  raven
+        dsn:   'https://731be73a2d264b688b21b5eb9f705ae5:d2f605697ca14cf5aefd0ce1e26a7440@app.getsentry.com/55869'
+        level: error
+
+    # Groups
+    grouped_main:
+        type:    group
+        members: [sentry, streamed_main]
+
+    # Streams
+    streamed_main:
+        type:  stream
+        path:  %kernel.logs_dir%/%kernel.environment%.log
+        level: error
+
+assetic:
+    filters:
+        uglifyjs2:
+            bin: %kernel.root_dir%/../node_modules/uglify-js/bin/uglifyjs
+            apply_to: "\.js$"
+        uglifycss:
+            bin: %kernel.root_dir%/../node_modules/uglifycss/uglifycss
+            apply_to: "\.css$"

@@ -1,0 +1,21 @@
+{% extends '::base.html.twig' %}
+
+{% block nav_context_user '' %}
+
+{% block content %}
+  <div class="row">
+    <div class="col-md-12">
+      <div class="well">
+        <h1 class="page-header">{{ 'error404.title'|trans|desc('Page not found') }}</h1>
+        <p>{{ 'error404.text'|trans|desc('La page que vous avez demandé n\'est plus disponible.') }}</p>
+        <div class="text-center">
+          <a class="btn btn-primary btn-lg" href="{{ path('homepage') }}">{{ 'error.back'|trans|desc('Back to homepage') }}</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script type="text/javascript">
+    var hasPageNotFoundError = true;
+  </script>
+{% endblock %} 

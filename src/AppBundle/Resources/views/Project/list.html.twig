@@ -1,0 +1,62 @@
+{% extends '::base.html.twig' %}
+
+{% block content %}
+    <div class="row">
+        <div class="col-md-12">
+            <div class="homepage-panel">
+                <div class="panel panel-default">
+                    <div class="panel-heading uppercase">{{ 'project_list.title'|trans|desc('My Projects') }}</div>
+                    <div class="panel-body">
+                        {% if not list|length %}
+                            <div class="well margin-top-10">
+                                <div class="text-right">
+                                    <a href="{{ path('app_projects_add') }}" class="btn btn-primary btn-block">{{ 'project_list.action.add'|trans|desc('Add a new project') }}</a>
+                                </div>
+                            </div>
+                        {% else %}
+                            <div class="text-right">
+                                <a href="{{ path('app_projects_add') }}" class="btn btn-primary">{{ 'project_list.action.add'|trans|desc('Add a new project') }}</a>
+                            </div>
+                            <div class="margin-top-30">
+                                <table class="table table-striped table-hover margin-top-10">
+                                    <thead>
+                                    <tr>
+                                        <th class="uppercase">{{ 'project_list.list.project'|trans|desc('Project') }}</th>
+                                        <th class="uppercase">{{ 'project_list.list.description'|trans|desc('Description') }}</th>
+                                        <th class="uppercase">{{ 'project_list.list.repository'|trans|desc('Repository') }}</th>
+                                        <th class="uppercase text-center">{{ 'project_list.list.config_success'|trans|desc('Configuration OK ?') }}</th>
+                                        <th class="uppercase text-center">{{ 'project_list.list.is_enabled'|trans|desc('Enabled ?') }}</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    {% for project in list %}
+                                        <tr>
+                                            <td><a href="{{ path('app_projects_show', {id: project.id}) }}">{{ project.name }}</a></td>
+                                            <td>{{ project.description ? project.description : 'n/a' }}</td>
+                                            <td>{{ project.repository }}</td>
+                                            <td class="text-center">
+                                                {% if project.hasValidAuthentificationRepository %}
+                                                    <span class="label label-success">{{ 'project_list.list.no'|trans|desc('Yes') }}</span>
+                                                {% else %}
+                                                    <span class="label label-danger">{{ 'project_list.list.yes'|trans|desc('No') }}</span>
+                                                {% endif %}
+                                            </td>
+                                            <td class="text-center">
+                                                {% if project.isEnabled %}
+                                                    <span class="label label-success">{{ 'project_list.list.no'|trans|desc('Yes') }}</span>
+                                                {% else %}
+                                                    <span class="label label-danger">{{ 'project_list.list.yes'|trans|desc('No') }}</span>
+                                                {% endif %}
+                                            </td>
+                                        </tr>
+                                    {% endfor %}
+                                    </tbody>
+                                </table>
+                            </div>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

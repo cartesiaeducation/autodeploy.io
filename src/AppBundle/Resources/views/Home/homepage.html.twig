@@ -1,0 +1,38 @@
+{% extends '::base.html.twig' %}
+
+{% block content %}
+    <div class="row">
+        <div class="col-md-12">
+            <div class="jumbotron">
+                <h1 class="uppercase">autodeploy.io</h1>
+                <p>{{ 'homepage.autodeploy.title'|trans|desc('is an automated deployment platform build on the top of Capistrano for your applications, fast and simple to use.') }}</p>
+                <p><a class="btn btn-primary btn-lg" href="{{ path('fos_user_registration_register') }}">{{ 'homepage.autodeploy.text'|trans|desc('GET STARTED') }}</a></p>
+            </div>
+        </div>
+
+        <div class="col-md-4 homepage-panel">
+            <div class="panel panel-default">
+                <div class="panel-heading uppercase">{{ 'homepage.automated_deployment.title'|trans|desc('Automated Deployment') }}</div>
+                <div class="panel-body">
+                    <p>{{ 'homepage.automated_deployment.text'|trans|desc('Easily configure yours applications for automated deployment on an event like a commit on your GIT repository or manually with our manager.') }}</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4 homepage-panel">
+            <div class="panel panel-default">
+                <div class="panel-heading uppercase">{{ 'homepage.capistrano_gui.title'|trans|desc('Capistrano GUI') }}</div>
+                <div class="panel-body">
+                    <p>{{ 'homepage.capistrano_gui.text'|trans|desc('Autodeploy.io is currently only supporting automated deployment of your applications with Capistrano v2 or v3.') }}</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4 homepage-panel">
+            <div class="panel panel-default">
+                <div class="panel-heading uppercase">{{ 'homepage.developer_friendly.title'|trans|desc('Developer Friendly') }}</div>
+                <div class="panel-body">
+                    <p>{{ 'homepage.developer_friendly.text'|trans|desc('Fast and simple to use, autodeploy.io allow developers to integrate our plateform in few minutes.') }}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

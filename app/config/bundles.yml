@@ -1,0 +1,59 @@
+fos_user:
+    db_driver:     orm
+    firewall_name: main
+    user_class:    AppBundle\Entity\User
+    registration:
+        confirmation:
+            enabled: true
+    service:
+        mailer: app.mailer
+
+hwi_oauth:
+    #this is my custom user provider, created from FOSUBUserProvider - will manage the
+    #automatic user registration on your site, with data from the provider (facebook. google, etc.)
+    #and also, the connecting part (get the token and the user_id)
+    connect:
+        account_connector: app.oauth.user_provider
+    firewall_name: main
+    fosub:
+        username_iterations: 30
+        properties:
+            # these properties will be used/redefined later in the custom FOSUBUserProvider service.
+            github: github_id
+            bitbucket: bitbucket_id
+    resource_owners:
+        github:
+            type:                github
+            client_id:           %github_client_id%
+            client_secret:       %github_client_secret%
+            scope:               "user:email"
+        bitbucket:
+            type:                bitbucket
+            client_id:           %bitbucket_client_id%
+            client_secret:       %bitbucket_client_secret%
+
+sylius_cart:
+    resolver: app.cart_item_resolver # The id of our newly created service.
+    classes: ~ # This key can be empty but it must be present in the configuration.
+
+sylius_order:
+    driver: doctrine/orm
+    classes:
+        order_item:
+            model: AppBundle\Entity\CartItem # If you have created a custom CartItem entity.
+
+sylius_money: ~
+
+fos_rest:
+    view:
+        formats:
+            rss: false
+            xml: false
+
+braincrafted_bootstrap:
+    less_filter: sass
+    auto_configure:
+        assetic: false
+        twig: false
+        knp_menu: true
+        knp_paginator: true

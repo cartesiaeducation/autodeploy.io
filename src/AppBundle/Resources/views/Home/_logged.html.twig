@@ -1,0 +1,17 @@
+{% if is_granted('ROLE_SUPER_ADMIN') %}
+    <li><a href="{{ path('sonata_admin_redirect') }}" class="uppercase">{{ 'layout.menu.admin'|trans|desc('Administration') }}</a></li>
+{% endif %}
+
+{% if is_granted('ROLE_USER') %}
+    <li><a href="{{ path('app_projects') }}" class="uppercase">{{ 'layout.menu.projects'|trans|desc('My Project') }}</a></li>
+    <li class="dropdown">
+        <a class="dropdown-toggle uppercase" data-toggle="dropdown" href="#">{{ app.user.username }} <span class="caret"></span></a>
+        <ul class="dropdown-menu">
+            <li><a href="{{ path('fos_user_change_password') }}" class="uppercase">{{ 'layout.menu.account_password'|trans|desc('Change password') }}</a></li>
+            <li><a href="{{ path('fos_user_security_logout') }}" class="uppercase">{{ 'layout.menu.logout'|trans|desc('Logout') }}</a></li>
+        </ul>
+    </li>
+{% else %}
+    <li><a class="uppercase" href="{{ path('fos_user_security_login') }}">{{ 'layout.menu.login'|trans|desc('Log in') }}</a></li>
+    <li><a class="uppercase" href="{{ path('fos_user_registration_register') }}">{{ 'layout.menu.get_start'|trans|desc('Get Start') }}</a></li>
+{% endif %}

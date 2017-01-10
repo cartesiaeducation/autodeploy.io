@@ -1,0 +1,85 @@
+{% extends '::base.html.twig' %}
+
+{% block meta_title %}{{ 'features.meta.title'|trans|desc('autodeploy.io - Features') }}{% endblock %}
+{% block meta_description %}{{ 'features.meta.desc'|trans|desc('Explore all features of autodeploy.io for Automated Deployment of your applications.') }}{% endblock %}
+{% block og_description %}{{ 'features.meta.desc'|trans|desc('Explore all features of autodeploy.io for Automated Deployment of your applications.') }}{% endblock %}
+
+{% block content %}
+    <div class="row">
+        <div class="col-md-12">
+            <div class="homepage-panel">
+                <div class="panel panel-default">
+                    <div class="panel-heading uppercase">{{ 'features.title'|trans|desc('Features') }}</div>
+                    <div class="panel-body">
+                        <h1 class="page-header">{{ 'features.what_is.title'|trans|desc('What is autodeploy.io ?') }}</h1>
+
+                        <p>
+                            {{ 'features.what_is.text1'|trans|desc('autodeploy.io is an Automated Deployment tool build on the top of Capistrano.') }}<br />
+                            {{ 'features.what_is.text2'|trans|desc('Fast and simple to use, you can integrate autodeploy.io in few minutes in your Symfony2 project (or any application which have Capistrano configured).') }}
+                        </p>
+
+                        <h1 class="page-header margin-top-40">{{ 'features.supported.title'|trans|desc('Supported features') }}</h1>
+
+                        <p>{{ 'features.supported.text'|trans|desc('This service is always under development, the following list of features is not exaustive.') }}</p>
+
+                        <div class="row">
+                            <div class="col-md-7">
+                                <table class="table table-striped margin-top-20">
+                                    <tbody>
+                                    <tr>
+                                        <td class="uppercase"><strong>{{ 'features.supported.automated_deployment'|trans|desc('Automated Deployments') }}</strong></td>
+                                        <td class="text-right"><span class="label label-success uppercase">{{ 'features.supported.yes'|trans|desc('Yes') }}</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="uppercase"><strong>{{ 'features.supported.manual_deployment'|trans|desc('Manual Deployment') }}</strong></td>
+                                        <td class="text-right"><span class="label label-success uppercase">{{ 'features.supported.yes'|trans|desc('Yes') }}</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="uppercase"><strong>{{ 'features.supported.capistrano_gui'|trans|desc('Capistrano GUI (support v2/v3)') }}</strong></td>
+                                        <td class="text-right"><span class="label label-success uppercase">{{ 'features.supported.yes'|trans|desc('Yes') }}</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="uppercase"><strong>{{ 'features.supported.private_git_repository'|trans|desc('Private GIT repositories') }}</strong></td>
+                                        <td class="text-right"><span class="label label-success uppercase">{{ 'features.supported.yes'|trans|desc('Yes') }}</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="uppercase"><strong>{{ 'features.supported.multiple_environment'|trans|desc('Multiple Environements') }}</strong></td>
+                                        <td class="text-right"><span class="label label-success uppercase">{{ 'features.supported.yes'|trans|desc('Yes') }}</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="uppercase"><strong>{{ 'features.supported.live_execution'|trans|desc('Live execution of your Tasks') }}</strong></td>
+                                        <td class="text-right"><span class="label label-success uppercase">{{ 'features.supported.yes'|trans|desc('Yes') }}</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="uppercase"><strong>{{ 'features.supported.log_execution'|trans|desc('Log of Executed Task') }}</strong></td>
+                                        <td class="text-right"><span class="label label-success uppercase">{{ 'features.supported.yes'|trans|desc('Yes') }}</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="uppercase"><strong>{{ 'features.supported.collaborators'|trans|desc('Collaborators') }}</strong></td>
+                                        <td class="text-right"><span class="label label-success uppercase">{{ 'features.supported.yes'|trans|desc('Yes') }}</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="uppercase"><strong>{{ 'features.supported.slack_integration'|trans|desc('Slack Integration') }}</strong></td>
+                                        <td class="text-right"><span class="label label-success uppercase">{{ 'features.supported.yes'|trans|desc('Yes') }}</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="uppercase"><strong>{{ 'features.supported.webhooks'|trans|desc('Webhooks') }}</strong></td>
+                                        <td class="text-right"><span class="label label-success uppercase">{{ 'features.supported.yes'|trans|desc('Yes') }}</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="uppercase"><strong>{{ 'features.supported.ssh_key_generation'|trans|desc('SSH public keys generation') }}</strong></td>
+                                        <td class="text-right"><span class="label label-success uppercase">{{ 'features.supported.yes'|trans|desc('Yes') }}</span></td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="col-md-5 margin-top-20">
+                                <iframe style="height: 390px;" width="100%" height="100%" src="//www.youtube.com/embed/gwja3GySc3g" frameborder="0" allowfullscreen=""></iframe>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

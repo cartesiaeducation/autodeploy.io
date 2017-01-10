@@ -1,0 +1,30 @@
+{% extends 'AppBundle:Project:layout.html.twig' %}
+{% form_theme form 'bootstrap_3_horizontal_layout.html.twig' %}
+
+{% set sidebarAction = 'environments' %}
+{% block project_title %}Add new environement{% endblock %}
+
+{% block breadcrumb %}
+    <ul class="breadcrumb">
+        <li><a href="{{ path('app_projects') }}">{{ 'project_list.breadcrumb'|trans|desc('Projects') }}</a></li>
+        <li><a href="{{ path('app_projects_show', {id: project.id}) }}">{{ project.name }}</a></li>
+        <li><a href="{{ path('app_project_environments', {id: project.id}) }}">Environments</a></li>
+        <li class="active">Add a new environment</li>
+    </ul>
+{% endblock %}
+
+{% block project_content %}
+    <form method="post" action="{{ path('app_projects_environments_add', {id: project.id}) }}" class="form-horizontal margin-top-30">
+        <fieldset>
+            {{ form_errors(form) }}
+
+            {{ form_row(form.name) }}
+
+            <div class="text-right">
+                {{ form_rest(form) }}
+                <a href="{{ path('app_project_environments', {id: project.id}) }}" class="btn btn-default">Cancel</a>
+                <button type="submit" class="btn btn-primary">Continue</button>
+            </div>
+        </fieldset>
+    </form>
+{% endblock %}

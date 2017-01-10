@@ -1,0 +1,167 @@
+<?xml version="1.0" ?>
+
+<container xmlns="http://symfony.com/schema/dic/services"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <services>
+
+        <!-- Managers-->
+        <service id="app.project_manager" class="AppBundle\Manager\ProjectManager">
+            <argument type="service" id="doctrine.orm.entity_manager" />
+            <argument type="service" id="app.ssh_manager"/>
+            <argument type="service" id="app.project_authentification_manager"/>
+        </service>
+
+        <service id="app.task_manager" class="AppBundle\Manager\TaskManager">
+            <argument type="service" id="doctrine.orm.entity_manager"/>
+            <argument type="service" id="app.project_manager" />
+            <argument type="service" id="app.capistrano_task" />
+        </service>
+
+        <service id="app.project_authentification_manager" class="AppBundle\Manager\ProjectAuthentificationManager">
+            <argument type="service" id="doctrine.orm.entity_manager" />
+            <argument type="service" id="old_sound_rabbit_mq.authentification_check_producer" />
+        </service>
+
+        <service id="app.collaborator_manager" class="AppBundle\Manager\CollaboratorManager">
+            <argument type="service" id="doctrine.orm.entity_manager"/>
+        </service>
+
+        <service id="app.environment_manager" class="AppBundle\Manager\EnvironmentManager">
+            <argument type="service" id="doctrine.orm.entity_manager"/>
+            <argument type="service" id="app.ssh_manager"/>
+            <argument type="service" id="app.project_authentification_manager"/>
+        </service>
+
+        <service id="app.queue_manager" class="AppBundle\Manager\QueueManager">
+            <argument type="service" id="doctrine.orm.entity_manager" />
+            <argument type="service" id="old_sound_rabbit_mq.queue_run_producer" />
+        </service>
+
+        <service id="app.webhook_manager" class="AppBundle\Manager\WebhookManager">
+            <argument type="service" id="doctrine.orm.entity_manager"/>
+        </service>
+
+        <service id="app.slack_manager" class="AppBundle\Manager\SlackManager">
+            <argument type="service" id="doctrine.orm.entity_manager"/>
+        </service>
+
+        <service id="app.log_manager" class="AppBundle\Manager\LogManager">
+            <argument type="service" id="doctrine"/>
+        </service>
+
+        <!-- Consumers -->
+        <service id="app.consumer" class="AppBundle\Consumer\AbstractConsumer" abstract="true">
+            <argument type="service" id="doctrine" />
+            <argument type="service" id="app.log_manager"/>
+        </service>
+
+        <service id="app.authentification_check_consumer" class="AppBundle\Consumer\AuthentificationCheckConsumer" parent="app.consumer">
+            <argument type="service" id="app.authentification_checker_service"/>
+        </service>
+
+        <service id="app.tasks_retrieve_consumer" class="AppBundle\Consumer\TasksRetrieveConsumer" parent="app.consumer">
+            <argument type="service" id="app.task_manager"/>
+        </service>
+
+        <service id="app.queue_run_consumer" class="AppBundle\Consumer\QueueRunConsumer" parent="app.consumer">
+            <argument type="service" id="app.queue_manager"/>
+            <argument type="service" id="app.queue_runner"/>
+        </service>
+
+        <!-- Services -->
+        <service id="app.git_manager" class="AppBundle\Services\Git\GitManager">
+            <argument>%project_cache_path%</argument>
+            <argument type="service" id="app.process_manager" />
+        </service>
+
+        <service id="app.ssh_manager" class="AppBundle\Services\SSH\SshManager"></service>
+
+        <service id="app.project_context" class="AppBundle\Services\ProjectContext">
+            <argument type="service" id="app.git_manager"/>
+            <argument type="service" id="app.capistrano_manager" />
+        </service>
+
+        <service id="app.capistrano_manager" class="AppBundle\Services\Capistrano\CapistranoManager">
+            <argument type="service" id="app.process_manager" />
+            <argument>%caspitrano_sudoer%</argument>
+        </service>
+
+        <service id="app.caspitrano_wizard" class="AppBundle\Services\Capistrano\CapistranoWizard">
+            <argument type="service" id="app.process_manager"/>
+        </service>
+
+        <service id="app.capistrano_task" class="AppBundle\Services\Capistrano\CapistranoTask">
+            <argument type="service" id="doctrine.orm.entity_manager"/>
+            <argument type="service" id="old_sound_rabbit_mq.tasks_retrieve_producer" />
+            <argument type="service" id="app.project_manager"/>
+            <argument type="service" id="app.project_context"/>
+        </service>
+
+        <service id="app.queue_runner" class="AppBundle\Services\Queue\QueueRunner">
+            <argument type="service" id="app.project_context"/>
+            <argument type="service" id="app.queue_manager"/>
+            <argument type="service" id="app.slack_client"/>
+        </service>
+
+        <service id="app.slack_client" class="AppBundle\Services\SlackClient">
+            <argument>%slack_bot_name%</argument>
+        </service>
+
+        <service id="app.authentification_checker_service" class="AppBundle\Services\Authentification\AuthentificationChecker">
+            <argument type="service" id="app.project_authentification_manager"/>
+            <argument type="service" id="app.git_manager"/>
+            <argument type="service" id="app.ssh_manager"/>
+            <argument type="service" id="app.task_manager"/>
+        </service>
+
+        <service id="app.mailer" class="AppBundle\Services\Mailer">
+            <argument type="service" id="mailer" />
+            <argument type="service" id="lexik_mailer.message_factory" />
+            <argument type="service" id="router" />
+            <argument>%mailer_admin_email%</argument>
+        </service>
+
+        <service id="app.listener.registration_success" class="AppBundle\Listener\RegistrationListener">
+            <argument type="service" id="app.mailer" />
+            <argument type="service" id="request_stack" />
+            <tag name="kernel.event_subscriber" />
+        </service>
+
+        <service id="app.chart" class="AppBundle\Services\Chart\Chart">
+
+        </service>
+
+        <!-- Utils -->
+        <service id="app.process_manager" class="AppBundle\Util\ProcessManager">
+            <argument>%ssh_path%</argument>
+            <argument>%nodejs_url%</argument>
+        </service>
+
+
+        <service id="app.cart_item_resolver" class="AppBundle\Cart\ItemResolver">
+            <argument type="service" id="doctrine.orm.entity_manager" />
+        </service>
+
+        <!-- Security -->
+        <service id="app.login_success_handler" class="AppBundle\Security\LoginSuccessHandler">
+            <argument type="service" id="router" />
+        </service>
+
+        <service id="app.user_provider.email" class="AppBundle\Security\Provider\EmailProvider">
+            <argument type="service" id="fos_user.user_manager" />
+        </service>
+
+        <service id="fos_user.listener.flash" class="AppBundle\Listener\FlashListener">
+            <tag name="kernel.event_subscriber" />
+            <argument type="service" id="session" />
+            <argument type="service" id="translator" />
+        </service>
+
+        <service id="app.twig.ainsi_to_html" class="SensioLabs\AnsiConverter\Bridge\Twig\AnsiExtension">
+            <tag name="twig.extension" />
+        </service>
+    </services>
+
+</container>

@@ -1,0 +1,50 @@
+{% extends 'AppBundle:Project:layout.html.twig' %}
+
+{% set sidebarAction = 'repositories' %}
+{% block project_title %}Repository Authentification{% endblock %}
+
+{% block breadcrumb %}
+    <ul class="breadcrumb">
+        <li><a href="{{ path('app_projects') }}">{{ 'project_list.breadcrumb'|trans|desc('Projects') }}</a></li>
+        <li><a href="{{ path('app_projects_show', {id: project.id}) }}">{{ project.name }}</a></li>
+        <li class="active">Repositories</li>
+    </ul>
+{% endblock %}
+
+{% block project_content %}
+    <h4 class="page-header">Authentification Repository State</h4>
+
+    <table class="table table-striped table-hover margin-top-10">
+        <thead>
+        <tr>
+            <th class="uppercase">Name</th>
+            <th class="uppercase text-right">Tested ?</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for authentification in list.repositories %}
+            <tr>
+                <td>{{ authentification.name }}</td>
+                <td class="text-right">
+                    {{ authentification.isValid ? '<span class="label label-success">Yes</span>' : '<span class="label label-danger">No</span>' }}
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <div class="text-right margin-top-10 check-permissions">
+        <button class="btn btn-info" data-href="{{ path('app_projects_check_permissions', {id: project.id}) }}">Check Permissions</button>
+    </div>
+    <div class="text-right margin-top-10 masked permissions-success">
+        <button class="btn btn-success">Permissions OK</button>
+    </div>
+
+    <h4 class="page-header margin-top-30">Regenerate public key</h4>
+    <p class="margin-top-10">
+        If necessary you can regenerate a ssh public key. The current key will be removed.
+    </p>
+    <div class="text-right">
+        <a data-toggle="modal" href="{{ path('app_project_repository_regenerate', {id: project.id}) }}" data-target="#modal" data-backdrop="static" class="btn btn-primary">Regenerate public key</a>
+    </div>
+{% endblock %}

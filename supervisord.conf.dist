@@ -1,0 +1,23 @@
+[program:app_authentification_check]
+command=/usr/bin/php /home/autodeploy/www/current/app/console rabbitmq:consumer authentification_check --env=prod
+autorestart=true
+user=autodeploy
+redirect_stderr=false
+stdout_logfile=/var/log/supervisor/app_authentification_check.log
+stdout_logfile_maxbytes=10MB
+
+[program:app_task_retrieve]
+command=/usr/bin/php /home/autodeploy/www/current/app/console rabbitmq:consumer tasks_retrieve --env=prod
+autorestart=true
+user=autodeploy
+redirect_stderr=false
+stdout_logfile=/var/log/supervisor/app_task_retrieve.log
+stdout_logfile_maxbytes=10MB
+
+[program:app_queue_run]
+command=/usr/bin/php /home/autodeploy/www/current/app/console rabbitmq:consumer queue_run --env=prod
+autorestart=true
+user=autodeploy
+redirect_stderr=false
+stdout_logfile=/var/log/supervisor/app_queue_run.log
+stdout_logfile_maxbytes=10MB

@@ -1,0 +1,2 @@
+lexik_mailer:
+    admin_email: %mailer_admin_email%     # Admin email used to notify email templates errors

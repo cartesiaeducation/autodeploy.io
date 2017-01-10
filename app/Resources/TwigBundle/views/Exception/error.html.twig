@@ -1,0 +1,17 @@
+{% extends '::base.html.twig' %}
+
+{% block nav_context_user '' %}
+
+{% block content %}
+  <div class="row">
+    <div class="col-md-12">
+      <div class="well">
+        <h1 class="page-header">{{ 'error.title'|trans|desc('An error occured') }}</h1>
+        <p>{{ 'error.text'|trans|desc('Impossible d\'afficher la page que vous avez demandé.') }}</p>
+        <div class="text-center">
+          <a class="btn btn-primary btn-lg" href="{{ path('homepage') }}">{{ 'error.back'|trans|desc('Back to homepage') }}</a>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock %} 

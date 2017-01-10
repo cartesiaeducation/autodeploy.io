@@ -1,0 +1,60 @@
+{% extends 'AppBundle:Project:layout.html.twig' %}
+
+{% set sidebarAction = 'history' %}
+{% block project_title %}History{% endblock %}
+
+{% block breadcrumb %}
+    <ul class="breadcrumb">
+        <li><a href="{{ path('app_projects') }}">{{ 'project_list.breadcrumb'|trans|desc('Projects') }}</a></li>
+        <li><a href="{{ path('app_projects_show', {id: project.id}) }}">{{ project.name }}</a></li>
+        <li class="active">History</li>
+    </ul>
+{% endblock %}
+
+{% block project_content %}
+    {% if not list|length %}
+        <p>
+            This project doesn't have any history.
+        </p>
+    {% else %}
+
+        <table class="table table-striped table-hover margin-top-10">
+            <thead>
+            <tr>
+                <th>Task</th>
+                <th>Environment</th>
+                <th class="text-center">Processed ?</th>
+                <th class="text-center">State</th>
+                <th class="text-right">Date</th>
+                <th class="text-right">User</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for history in list %}
+                <tr>
+                    <td>
+                        <a href="{{ path('app_project_history_show', {'id': history.id}) }}">{{ history.task ? history.task.name : 'N/A' }}</a>
+                    </td>
+                    <td>{{ history.environment ? history.environment.name : 'N/A' }}</td>
+                    <td class="text-center">
+                        {{ history.isProcessed ? '<span class="label label-success">Yes</span>' : '<span class="label label-danger">No</span>' }}
+                    </td>
+                    <td class="text-center">
+                        {% if history.state == 'error' %}
+                            <span class="label label-danger">{{ history.state|upper }}</span>
+                        {% elseif history.state == 'success' %}
+                            <span class="label label-success">{{ history.state|upper }}</span>
+                        {% elseif history.state == 'progress' %}
+                            <span class="label label-warning">{{ history.state|upper }}</span>
+                        {% else %}
+                            <span class="label label-info">IN {{ history.state|upper }}</span>
+                        {% endif %}
+                    </td>
+                    <td class="text-right">{{ history.createdAt.format('d M Y H:i:s') }}</td>
+                    <td class="text-right">{{ history.user.username }}</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    {% endif %}
+{% endblock %}

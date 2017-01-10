@@ -1,0 +1,17 @@
+{% extends '::base.html.twig' %}
+
+{% block nav_context_user '' %}
+
+{% block content %}
+  <div class="row">
+    <div class="col-md-12">
+      <div class="well">
+        <h1 class="page-header">{{ 'error403.title'|trans|desc('Access Denied') }}</h1>
+        <p>{{ 'error403.text'|trans|desc('La page que vous avez demandé est sécurisé ; vous n\'avez pas les droits requis pour afficher la page.') }}</p>
+        <div class="text-center">
+          <a class="btn btn-primary btn-lg" href="{{ path('homepage') }}">{{ 'error.back'|trans|desc('Back to homepage') }}</a>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock %} 

@@ -1,0 +1,82 @@
+{% extends '::base.html.twig' %}
+{% set sidebarAction = sidebarAction is defined ? sidebarAction : 'dashboard' %}
+
+{% block breadcrumb %}
+    <ul class="breadcrumb">
+        <li><a href="{{ path('app_projects') }}">{{ 'project_list.breadcrumb'|trans|desc('Projects') }}</a></li>
+        <li class="active">{{ project.name }}</li>
+    </ul>
+{% endblock %}
+
+{% block content %}
+    {% if not project.hasValidAuthentificationRepository
+        and sidebarAction != 'repositories'
+        and sidebarAction != 'edit' %}
+        {% include 'AppBundle:Project:_no_authentification.html.twig' %}
+    {% else %}
+        <div class="row">
+            <div class="col-md-3">
+                <div class="homepage-panel">
+                    <div class="panel panel-default">
+                        <div class="panel-heading uppercase">{{ 'project_layout.title.navigation'|trans|desc('Navigation') }}</div>
+                        <div class="panel-body">
+                            <div class="row">
+                                <ul class="nav nav-pills nav-stacked" style="padding: 5px;">
+                                    {% if project.hasAuthentificationRepository %}
+                                        <li {% if sidebarAction == 'dashboard' %}class="active"{% endif %}><a href="{{ path('app_projects_show', {id: project.id}) }}">{{ 'project_layout.title.dashboard'|trans|desc('Dashboard') }}</a></li>
+                                        <li {% if sidebarAction == 'tasks' %}class="active"{% endif %}><a href="{{ path('app_project_tasks', {id: project.id}) }}"><strong>{{ 'project_layout.title.run_task'|trans|desc('Run Task') }}</strong></a></li>
+                                        <li {% if sidebarAction == 'history' %}class="active"{% endif %}><a href="{{ path('app_project_history', {id: project.id}) }}">{{ 'project_layout.title.history'|trans|desc('History') }}</a></li>
+                                        <li {% if sidebarAction == 'environments' %}class="active"{% endif %}><a href="{{ path('app_project_environments', {id: project.id}) }}">{{ 'project_layout.title.environments'|trans|desc('Environments') }}</a></li>
+                                        <li {% if sidebarAction == 'collaborators' %}class="active"{% endif %}><a href="{{ path('app_projects_collaborators', {id: project.id}) }}">{{ 'project_layout.title.collaborators'|trans|desc('Collaborators') }}</a></li>
+                                        <li {% if sidebarAction == 'repositories' %}class="active"{% endif %}><a href="{{ path('app_project_authentification_list', {id: project.id}) }}">{{ 'project_layout.title.repository'|trans|desc('Repository Authentification') }}</a></li>
+                                        <li {% if sidebarAction == 'webhooks' %}class="active"{% endif %}><a href="{{ path('app_project_webhooks', {id: project.id}) }}">{{ 'project_layout.title.webhooks'|trans|desc('Webhooks') }}</a></li>
+                                        <li {% if sidebarAction == 'slack' %}class="active"{% endif %}><a href="{{ path('app_project_slacks', {id: project.id}) }}">{{ 'project_layout.title.slack_integration'|trans|desc('Slack Integration') }}</a></li>
+                                        <li {% if sidebarAction == 'edit' %}class="active"{% endif %}><a href="{{ path('app_projects_edit', {id: project.id}) }}">{{ 'project_layout.title.edit_project'|trans|desc('Edit Project') }}</a></li>
+                                    {% else %}
+                                        <li {% if sidebarAction == 'repositories' %}class="active"{% endif %}><a href="{{ path('app_project_authentification_add', {id: project.id}) }}">{{ 'project_layout.title.repository'|trans|desc('Repository Authentification') }}</a></li>
+                                        <li {% if sidebarAction == 'collaborators' %}class="active"{% endif %}><a href="{{ path('app_projects_collaborators', {id: project.id}) }}">{{ 'project_layout.title.collaborators'|trans|desc('Collaborators') }}</a></li>
+                                        <li {% if sidebarAction == 'edit' %}class="active"{% endif %}><a href="{{ path('app_projects_edit', {id: project.id}) }}">{{ 'project_layout.title.edit_project'|trans|desc('Edit Project') }}</a></li>
+                                    {% endif %}
+                                </ul>
+                                {% if project.hasTaskDeploy %}
+                                    <div class="text-center" style="padding: 5px;">
+                                        <a href="{{ path('app_project_queue_add', {'id': project.getTaskDeploy.id}) }}" class="btn btn-info btn-block">Deploy</a>
+                                    </div>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-9">
+                <div class="homepage-panel">
+                    <div class="panel panel-default">
+                        <div class="panel-heading uppercase">{% block project_title %}{{ project.name }}{% endblock %}</div>
+                        <div class="panel-body">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    {% block project_content '' %}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% endif %}
+
+    <div class="modal fade" id="modal" tabindex="-1" role="dialog" aria-labelledby="modal">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content"></div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block additionnalJavascript %}
+    <script type="text/javascript">
+        var repositoryOptions = {
+            stateUrl: '{{ path('app_projects_state_permissions', {'id': project.id}) }}',
+            currentlyChecking: false
+        };
+    </script>
+{% endblock %}

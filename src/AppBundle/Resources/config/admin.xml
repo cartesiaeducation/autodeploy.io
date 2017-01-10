@@ -1,0 +1,39 @@
+<?xml version="1.0" ?>
+
+<container xmlns="http://symfony.com/schema/dic/services"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <services>
+
+        <service id="app.admin.user" class="AppBundle\Admin\UserAdmin">
+            <tag name="sonata.admin" manager_type="orm" group="Management" label="Users" />
+            <argument />
+            <argument>AppBundle\Entity\User</argument>
+            <argument />
+        </service>
+
+        <service id="app.admin.project" class="AppBundle\Admin\ProjectAdmin">
+            <tag name="sonata.admin" manager_type="orm" group="Management" label="Projects" />
+            <argument />
+            <argument>AppBundle\Entity\Project</argument>
+            <argument />
+        </service>
+
+        <service id="app.admin.log" class="AppBundle\Admin\LogAdmin">
+            <tag name="sonata.admin" manager_type="orm" group="Management" label="Logs" />
+            <argument />
+            <argument>AppBundle\Entity\Log</argument>
+            <argument />
+        </service>
+
+        <service id="app.admin.plan" class="AppBundle\Admin\PlanAdmin">
+            <tag name="sonata.admin" manager_type="orm" group="Commercial" label="Plans" />
+            <argument />
+            <argument>AppBundle\Entity\Plan</argument>
+            <argument />
+        </service>
+
+    </services>
+
+</container>

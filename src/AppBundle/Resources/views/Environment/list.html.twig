@@ -1,0 +1,62 @@
+{% extends 'AppBundle:Project:layout.html.twig' %}
+
+{% set sidebarAction = 'environments' %}
+{% block project_title %}Environments{% endblock %}
+
+{% block breadcrumb %}
+    <ul class="breadcrumb">
+        <li><a href="{{ path('app_projects') }}">{{ 'project_list.breadcrumb'|trans|desc('Projects') }}</a></li>
+        <li><a href="{{ path('app_projects_show', {id: project.id}) }}">{{ project.name }}</a></li>
+        <li class="active">Environments</li>
+    </ul>
+{% endblock %}
+
+{% block project_content %}
+    <p>
+        Your can add multiple environment like <strong>prod</strong> or <strong>staging</strong> in your project.<br />
+        Environment contains your ssh key used for deploying.
+    </p>
+
+    {% if not list|length %}
+        <p>
+            This project doesn't have any environment.
+        </p>
+        <p class="text-right">
+            <a href="{{ path('app_projects_environments_add', {'id': project.id}) }}" class="btn btn-primary">Add Environment</a>
+        </p>
+    {% else %}
+        <p class="text-right">
+            <a href="{{ path('app_projects_environments_add', {'id': project.id}) }}" class="btn btn-primary">Add Environment</a>
+        </p>
+
+        {% for environment in list %}
+            <h4 class="page-header margin-top-50"><small><a href="{{ path('app_projects_environments_edit', {'id': environment.id}) }}" class="text-info"><span class="glyphicon glyphicon-pencil"></span></a></small> &nbsp;{{ environment.name|upper }}</h4>
+            {% if not environment.authentifications|length %}
+                <p>
+                    You doesn't have any deploy key for this environment.
+                </p>
+            {% else %}
+                <p>
+                    We have generated a SSH key your <strong>{{ environment.name }}</strong> environment.<br />
+                    You need to add the following SSH public key on your servers :
+                </p>
+
+                <div class="row margin-top-30">
+                    <div class="col-md-2"></div>
+                    <div class="col-md-8">
+                        <pre>ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQC7AEKhYMpcWFrJA+mTOpy55E2LiCO83CnS0icmeXPkE0/3Xe0uRUImzTSqXdw60zJJS+1G43vPfWwkIP97Kvlw4Qcu+EGvCnZSeXwlPwlsNCYE0iKVNRe+Zp3+90fJ0LegmqzFdwVRcJtFwnQZ+yFGf4ikDD7x4mFJiF3EO/j4OuNoQdgfWg07Bjz7PT6ddcfRtAy6hjSf9WkjPTgpL+dcHZgcd8/8DZzVV4XcAVgbRKZRG6DYnIvQcpVPfDnpnySIFEzotIfZXwtG5OkIgz03D53Cwod84/EIvOsRrdD2pUfH/HObeK/eiQ/klHfczPgDGZ4Hk6hvPEOYw1Yr2/v0rgj77LmqKIFJPiWdRNn9exl7XYPcv9Wvts12U/JwSva4v1F9QjmbdcghW/9NGkdbADUA/oxGSPsg0bkbJMltH9BmphQtByQ0g4rXv6WXklN4ChSre8QHXR3gr4l1la0ygcLzCmrlNJFtGEj8o/bAHAg6v6/rV5GwYr/0mFHKv5Q3+lxMTSvb3CV7x6a+ap9vKbcZNjuupeWgWgF2Jz7Lr+XS/il45pfqQuR65UNtkkv6qKzR6t3vadJLaaS3uvcaoIYPI5qEojRsQnExvpZ9e9kU65r3Nwl9om/xD/2xTyAaP1aUDTEqmFEV07N0n690+cgCK/WwiYory5069Pzw0Q== autodeploy.io</pre>
+                        {#<pre>{{ environment.authentification.sshPublic }}</pre>#}
+                    </div>
+                    <div class="col-md-2"></div>
+                </div>
+
+                <p class="margin-top-10">
+                    If necessary you can regenerate a ssh public key. The current key will be removed.
+                </p>
+                <div class="text-right">
+                    <a data-btnOkLabel="Regenerate" data-toggle="confirmation" data-href="{{ url('app_projects_environments_regenerate', {'id': environment.id}) }}" class="btn btn-primary">Regenerate public key</a>
+                </div>
+            {% endif %}
+        {% endfor %}
+    {% endif %}
+{% endblock %}

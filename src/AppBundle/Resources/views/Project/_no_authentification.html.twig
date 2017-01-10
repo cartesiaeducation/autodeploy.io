@@ -1,0 +1,36 @@
+<div class="homepage-panel">
+    <div class="panel panel-default">
+        <div class="panel-heading uppercase">Configure Deployment</div>
+        <div class="panel-body">
+            <h1 class="page-header">Authentification for GIT Repository</h1>
+            <p>
+                The first step is to configure a SSH deployment key for your GIT Repository.<br />
+                This is necessary for allow autodeploy.io to deploy your code.
+            </p>
+            <p>
+                Your repository is <strong>{{ project.repository }}</strong>
+            </p>
+
+            <p class="margin-top-50">
+                We have generated a SSH key for your new project. You need to add the following key in your GitHub / BitBucket deploy keys.
+            </p>
+            <p>
+                If you repository is public, you don't need to add the following check.
+            </p>
+            <div class="row margin-top-30">
+                <div class="col-md-2"></div>
+                <div class="col-md-8">
+                    <pre>{{ project.authentificationRepository.sshPublic }}</pre>
+                </div>
+                <div class="col-md-2"></div>
+            </div>
+
+            <div class="margin-top-30 check-permissions">
+                <button class="btn btn-info btn-lg btn-block uppercase" data-href="{{ path('app_projects_check_permissions', {id: project.id}) }}">Check Permissions</button>
+            </div>
+            <div class="margin-top-30 masked permissions-success">
+                <a class="btn btn-success btn-lg btn-block uppercase" href="{{ path('app_projects_show', {id: project.id}) }}">Continue</a>
+            </div>
+        </div>
+    </div>
+</div>
